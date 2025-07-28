@@ -71,9 +71,38 @@
   .text-error { color: var(--color-error); }
   .text-error-content { color: var(--color-error-content); }
 
+  .bg-copy { color: var(--color-copy); }
+  .bg-copy-light { color: var(--color-copy-light); }
+  .bg-copy-lighter { color: var(--color-copy-lighter); }
+
   /* Border color */
   .border-color { border-color: var(--color-border); }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (prefers-color-scheme: dark){
     

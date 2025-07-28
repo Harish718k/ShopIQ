@@ -15,11 +15,11 @@ const app = express()
 const PORT = ENV_VARS.PORT
 
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser()) 
 
-app.use(authRoutes)
-app.use(productRoutes)
-app.use(orderRoutes)
+app.use("/api/v1",authRoutes)
+app.use("/api/v1",productRoutes)
+app.use("/api/v1",orderRoutes)
 
 app.use(errorMiddleware)
 

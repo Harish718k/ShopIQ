@@ -1,0 +1,142 @@
+[
+  {
+    "name": "ChronoMax Elite",
+    "price": 129.99,
+    "stock": 20,
+    "description": "Premium analog wristwatch with stainless steel casing and water resistance up to 50 meters.",
+    "image": "https://loremflickr.com/320/240/watch?lock=1"
+  },
+  {
+    "name": "Titanium Voyage",
+    "price": 179.49,
+    "stock": 15,
+    "description": "Sleek digital watch with GPS functionality and long-lasting battery.",
+    "image": "https://loremflickr.com/320/240/watch?lock=2"
+  },
+  {
+    "name": "AeroTime Classic",
+    "price": 89.99,
+    "stock": 35,
+    "description": "Vintage-styled analog watch featuring genuine leather strap.",
+    "image": "https://loremflickr.com/320/240/watch?lock=3"
+  },
+  {
+    "name": "SteelSync Pro",
+    "price": 149.95,
+    "stock": 18,
+    "description": "Smart hybrid watch with step tracking and phone notification support.",
+    "image": "https://loremflickr.com/320/240/watch?lock=4"
+  },
+  {
+    "name": "Oceanic Quartz",
+    "price": 99.00,
+    "stock": 25,
+    "description": "Waterproof quartz watch designed for divers and outdoor adventurers.",
+    "image": "https://loremflickr.com/320/240/watch?lock=5"
+  },
+  {
+    "name": "Luxe Dial Premier",
+    "price": 210.75,
+    "stock": 10,
+    "description": "Luxury timepiece with rose gold accents and sapphire crystal glass.",
+    "image": "https://loremflickr.com/320/240/watch?lock=6"
+  },
+  {
+    "name": "TempoSport X",
+    "price": 129.50,
+    "stock": 22,
+    "description": "Sporty digital watch with heart rate monitor and fitness tracking.",
+    "image": "https://loremflickr.com/320/240/watch?lock=7"
+  },
+  {
+    "name": "Vintage Pulse",
+    "price": 75.99,
+    "stock": 30,
+    "description": "Retro-inspired analog watch with a minimalist dial and bronze finish.",
+    "image": "https://loremflickr.com/320/240/watch?lock=8"
+  },
+  {
+    "name": "Arctic Gear",
+    "price": 165.00,
+    "stock": 16,
+    "description": "Durable timepiece for extreme weather conditions with luminous hands.",
+    "image": "https://loremflickr.com/320/240/watch?lock=9"
+  },
+  {
+    "name": "Metro Chrono",
+    "price": 119.89,
+    "stock": 27,
+    "description": "Urban chronograph with stopwatch function and mesh metal strap.",
+    "image": "https://loremflickr.com/320/240/watch?lock=10"
+  },
+  {
+    "name": "Zenith Edge",
+    "price": 144.95,
+    "stock": 14,
+    "description": "Modern timepiece with a bold black face and interchangeable bands.",
+    "image": "https://loremflickr.com/320/240/watch?lock=11"
+  },
+  {
+    "name": "Mariner Blue",
+    "price": 134.00,
+    "stock": 20,
+    "description": "Nautical-themed watch with a blue dial and tide indicator.",
+    "image": "https://loremflickr.com/320/240/watch?lock=12"
+  },
+  {
+    "name": "Bold Horizon",
+    "price": 158.60,
+    "stock": 12,
+    "description": "Rugged analog-digital combo watch for active lifestyles.",
+    "image": "https://loremflickr.com/320/240/watch?lock=13"
+  },
+  {
+    "name": "Civic Hour",
+    "price": 92.45,
+    "stock": 26,
+    "description": "Elegant daily wear watch with a clean, crisp design.",
+    "image": "https://loremflickr.com/320/240/watch?lock=14"
+  },
+  {
+    "name": "Stratos Vision",
+    "price": 199.99,
+    "stock": 8,
+    "description": "Smartwatch with OLED screen and Bluetooth connectivity.",
+    "image": "https://loremflickr.com/320/240/watch?lock=15"
+  },
+  {
+    "name": "NovaTime Fusion",
+    "price": 140.25,
+    "stock": 17,
+    "description": "Fusion-style wristwatch blending classic and digital displays.",
+    "image": "https://loremflickr.com/320/240/watch?lock=16"
+  },
+  {
+    "name": "Urban Grid",
+    "price": 85.10,
+    "stock": 28,
+    "description": "Compact unisex analog watch with square face and urban design.",
+    "image": "https://loremflickr.com/320/240/watch?lock=17"
+  },
+  {
+    "name": "Stellar Orbit",
+    "price": 155.00,
+    "stock": 13,
+    "description": "Automatic mechanical watch inspired by celestial movements.",
+    "image": "https://loremflickr.com/320/240/watch?lock=18"
+  },
+  {
+    "name": "VibeTracker 2",
+    "price": 110.30,
+    "stock": 24,
+    "description": "Fitness watch with vibration alerts and hydration reminders.",
+    "image": "https://loremflickr.com/320/240/watch?lock=19"
+  },
+  {
+    "name": "Equinox Prime",
+    "price": 170.80,
+    "stock": 11,
+    "description": "Executive style analog watch with moon phase and date window.",
+    "image": "https://loremflickr.com/320/240/watch?lock=20"
+  }
+]

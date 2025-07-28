@@ -1,5 +1,5 @@
 import express from "express";
-import { changePassword, deleteUser, forgotPassword, 
+import { authCheck, changePassword, deleteUser, forgotPassword, 
     getAllUser, 
     getUser, 
     getUserProfile, 
@@ -15,7 +15,8 @@ const router = express.Router();
 
 router.post('/signup', signup)
 router.post('/login', login)
-router.post('/logout', logout)
+router.post('/logout', protectRoute, logout)
+router.get('/authCheck', protectRoute, authCheck)
 
 router.post('/password/forgot', forgotPassword)
 router.post('/password/reset/:token', resetPassword)

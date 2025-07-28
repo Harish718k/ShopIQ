@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/AuthUser'
+import { Link } from 'react-router-dom'
 
 export const SignupPage = () => {
 
   const {signup} = useAuthStore()
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSignup = (e)=>{
     e.preventDefault()
-    signup({firstName, lastName, email, password})
+    console.log(firstname, lastname, email, password);
+    
+    signup({firstname, lastname, email, password})
   }
 
   return (
@@ -27,7 +30,7 @@ export const SignupPage = () => {
               type="text"
               placeholder="First name"
               className="w-full px-4 py-2 text-copy border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)] text-copy"
-              onChange={(e)=>setFirstName(e.target.value)}
+              onChange={(e)=>setFirstname(e.target.value)}
               />
             </div>
             <div>
@@ -36,7 +39,7 @@ export const SignupPage = () => {
               type="text"
               placeholder="Last name"
               className="w-full px-4 py-2 text-copy border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)] text-copy"
-              onChange={(e)=>setLastName(e.target.value)}
+              onChange={(e)=>setLastname(e.target.value)}
               />
             </div>
           </div>
@@ -66,7 +69,9 @@ export const SignupPage = () => {
           </button>
         </form>
         <p className="text-sm text-copy-light text-center mt-4">
-          Already have an account? <a href="#" className="text-primary hover:underline">Log in</a>
+          Already have an account? <a href="#" className="text-primary hover:underline">
+            <Link to='/login'>Login</Link>
+          </a>
         </p>
       </div>
     </div>

@@ -314,3 +314,12 @@ export async function deleteUser(req,res) {
     }
     res.status(200).json({success:true, message:"User deleted."})
 }
+
+export async function authCheck(req, res){
+    try {
+        res.status(200).json({success: true, user: req.user})
+    } catch (error) {
+        console.log("Error in authCheck controller", error.message)
+        res.status(500).json({success: false, message: "Internal server error"});
+    }
+}

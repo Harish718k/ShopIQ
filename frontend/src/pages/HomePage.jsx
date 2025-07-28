@@ -1,10 +1,15 @@
 import React from 'react'
-import { Header } from '../components/Header'
+import {useAuthStore} from "../store/AuthUser"
+import { SignupPage } from './SignupPage'
+import { HomeScreen } from './HomeScreen'
 
 export const HomePage = () => {
+  const {user} = useAuthStore()
+  console.log(user);
+  
   return (
-    <div>
-      <Header/>
-    </div>
+    <>
+    {!user? <SignupPage/> : <HomeScreen/>}
+    </>
   )
 }

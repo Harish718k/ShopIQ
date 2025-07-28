@@ -45,9 +45,6 @@ export async function myOrders(req,res){
 
 export async function orders(req,res){
     const orders = await Order.find().populate('user', 'firstname lastname email');
-
-    let totalAmount = 0;
-
     res.status(200).json({success:true, count:orders.length, orders})
 }
 

@@ -6,9 +6,11 @@ import { APIFeatures } from "../utils/apiFeatures.js";
 
 export async function getProducts (req,res){
     try{
-        const productPerPage = 20
-        const apiFeatures = new APIFeatures(Product.find(), req.query).search().paginate(productPerPage)
+        // const productPerPage = 20
+        // const apiFeatures = new APIFeatures(Product.find(), req.query).search().paginate(productPerPage)
+        const apiFeatures = new APIFeatures(Product.find(), req.query).search().sort()
         const products = await apiFeatures.query;
+        // const products = await Product.find()
         if(products.length==0){
             return res.status(404).json({success:false, message:"Product not found"})
         }

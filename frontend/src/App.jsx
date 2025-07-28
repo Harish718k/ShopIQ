@@ -8,6 +8,7 @@ import { useAuthStore } from "./store/AuthUser"
 import { useEffect } from "react"
 import { LoaderCircle } from "lucide-react"
 import { HomeScreen } from "./pages/HomeScreen"
+import { ProductPage } from "./pages/ProductPage"
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
   
   useEffect(()=>{
     authCheck()
-  },[authCheck])
+  },[])
 
   if(isCheckingAuth){
     return (
@@ -34,6 +35,7 @@ function App() {
       <Route path='/' element={<HomePage/>}/>
       <Route path='/signup' element={!user ? <SignupPage/> : <HomeScreen/>}/>
       <Route path='/login' element={!user ? <LoginPage/> : <HomeScreen/>}/>
+      <Route path='/product' element={!user ? <SignupPage/> : <ProductPage/>}/>
     </Routes>
 
 

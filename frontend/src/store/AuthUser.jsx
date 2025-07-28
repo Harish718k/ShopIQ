@@ -5,9 +5,11 @@ import {create} from 'zustand'
 export const useAuthStore = create((set)=>({
     user:null,
     isSigningUp:false,
-    isLoggingin:true,
-    isLoggingout:true,
+    isLoggingin:false,
+    isLoggingout:false,
     isCheckingAuth:true,
+    isProfileUpdating:false,
+    isChangingPassword:false,
     authCheck: async ()=>{
         set({isCheckingAuth: true})
         try {
@@ -51,4 +53,26 @@ export const useAuthStore = create((set)=>({
             set({isLoggingout:false})
         }
     },
+    updateProfile: async (credentials)=>{
+        set({isProfileUpdating:true})
+        try {
+            const response = await axios.put("/api/v1/updateprofile", credentials)
+            set({user:response.data.user, isProfileUpdating:false})
+            toast.success("Profile updated successfully")
+        } catch (error) {
+            toast.error(error.response.data.message || "Profile update failed")
+            set({isProfileUpdating:false})
+        }
+    },
+    changePassword: async (credentials)=>{
+        set({isChangingPassword:true})
+        try {
+            const response = await axios.put("/api/v1/password/change", credentials)
+            set({user:response.data.user, isChangingPassword:false})
+            toast.success("Password changed successfully")
+        } catch (error) {
+            toast.error(error.response.data.message || "Password change failed")
+            set({isChangingPassword:false})
+        }
+    }
 }))

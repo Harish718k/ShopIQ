@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/AuthUser'
 import { Link } from 'react-router-dom'
+import { Header } from '../components/Header'
 
 export const SignupPage = () => {
 
@@ -18,7 +19,8 @@ export const SignupPage = () => {
     signup({firstname, lastname, email, password})
   }
 
-  return (
+  return (<>
+  <Header/>
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="bg-foreground p-8 rounded-2xl shadow-md w-full max-w-md border border-color">
         <h2 className="text-2xl font-bold text-center mb-6 text-primary-dark ">Create an Account</h2>
@@ -75,6 +77,6 @@ export const SignupPage = () => {
         </p>
       </div>
     </div>
-    
+    </>
   )
 }

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
+import { type } from "os";
 
 const userSchema = mongoose.Schema({
     firstname:{
@@ -24,10 +25,18 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "user"
     },
-    cart:{
-        type:Array,
-        default:[]
-    },
+    cart:[
+        {
+            product:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref: 'Product'
+            },
+            quantity:{
+                type:Number,
+                default: 1
+            }
+        }
+    ],
     orderHistory:{
         type:Array,
         default:[]

@@ -1,4 +1,4 @@
-import { ViewIcon, X } from 'lucide-react'
+import { Minus, Plus, ViewIcon, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ export const ProductCard = ({ name, description, price, inStock, onAddToCart, st
     text.length > maxLength ? text.slice(0, maxLength) + '...' : text
 
   const [isProductOpen, setIsProductOpen] = useState(false)
+  const [quantity, setQuantity] = useState(1)
 
   return (<>
     {isProductOpen && <div className='h-screen bg-gray-950/60 w-full fixed top-0 left-0 flex justify-center items-center'>
@@ -28,7 +29,12 @@ export const ProductCard = ({ name, description, price, inStock, onAddToCart, st
           {inStock ? 'In Stock' : 'Out of Stock'} {stock}
         </span>
       </div>
-
+      <div className='flex gap-4'>
+        <p>Quantity :</p>
+        <Plus/>
+        <input type="number" value={quantity} onChange={()=>setQuantity(e.target.value)}/>
+        <Minus/>
+      </div>
       <button
         onClick={onAddToCart}
         disabled={!inStock}
@@ -61,8 +67,17 @@ export const ProductCard = ({ name, description, price, inStock, onAddToCart, st
         </span>
       </div>
 
+      <div className='flex gap-4 justify-start items-center'>
+        <p>Quantity :</p>
+        <div className='flex justify-center w-30 items-center'>
+          <Plus size={20} onClick={()=>setQuantity(quantity+1)}/>
+        <input type="number" className='w-10 text-center' value={quantity} onChange={()=>setQuantity(e.target.value)} />
+        <Minus size={20} onClick={()=>setQuantity(quantity-1)}/>
+        </div>
+      </div>
+
       <button
-        onClick={onAddToCart}
+        onClick={()=>onAddToCart(quantity)}
         disabled={!inStock}
         className={`mt-4 py-2 px-4 text-sm font-medium rounded-lg transition duration-200 ${
           inStock

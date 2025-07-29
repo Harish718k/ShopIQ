@@ -21,13 +21,6 @@ export async function getProducts (req,res){
     }
 }
 
-
-export const newProduct = catchAsyncError(async (req,res)=>{
-    const product = await Product.create(req.body);
-    res.status(201).json({success:true, product})
-    
-})
-
 export async function getSingleProduct(req,res,next){
     try {
         
@@ -43,6 +36,16 @@ export async function getSingleProduct(req,res,next){
         res.status(500).json({success:false, message:"server error"})
     }
 }
+
+export const newProduct = catchAsyncError(async (req,res)=>{
+    const product = await Product.create(req.body);
+    res.status(201).json({success:true, product})
+    
+})
+
+
+
+//admin
 
 export async function updateProduct(req,res){
     try {

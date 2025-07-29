@@ -35,7 +35,7 @@ function App() {
       <Route path='/' element={<HomePage/>}/>
       <Route path='/signup' element={!user ? <SignupPage/> : <HomeScreen/>}/>
       <Route path='/login' element={!user ? <LoginPage/> : <HomeScreen/>}/>
-      <Route path='/product' element={!user ? <SignupPage/> : <ProductPage/>}/>
+      <Route path='/product' element={<ProductPage/>}/>
     </Routes>
 
 

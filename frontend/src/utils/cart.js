@@ -1,7 +1,14 @@
 import axios from 'axios';
 
 export const getLocalCart = ()=>{
-    JSON.parse(localStorage.getItem("cart") || '[]')
+    try {
+        const cart = JSON.parse(localStorage.getItem("cart") || '[]')
+        
+        return Array.isArray(cart) ? cart : [];
+    } catch (error) {
+        console.error("Invalid JSON in localStorage.cart");
+        return [];
+    }
 }
 
 export const saveLocalCart = (cart)=>{

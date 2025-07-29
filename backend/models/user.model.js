@@ -25,6 +25,10 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "user"
     },
+    isLoggedIn:{
+        type:Boolean,
+        default: false
+    },
     cart:[
         {
             product:{

@@ -31,6 +31,6 @@ export const useProductStore = create((set)=>({
             localCart.push({ productId, quantity });
         }
         localStorage.setItem("cart", JSON.stringify(localCart));
+    },
 
-    }
 }))

@@ -5,6 +5,8 @@ import { LoaderCircle } from 'lucide-react'
 import { ProductCard } from '../components/ProductCard'
 import { useAuthStore } from '../store/AuthUser'
 import { addToLocalCart } from '../utils/cart'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export const ProductPage = () => {
   const {user} = useAuthStore()
@@ -15,6 +17,7 @@ export const ProductPage = () => {
     getProduct()
     
   },[])
+
   console.log(products);
 
   const handleKeyDown = (e) => {
@@ -32,22 +35,25 @@ export const ProductPage = () => {
     try {
       if (user) {
         // Logged-in: send to backend
-        const res = await axios.post(
-          "/api/v1/cart/merge",
+        const res = await axios.put(
+          "/api/v1/cart/add",
           { productId, quantity },
           { withCredentials: true }
         );
 
         if (res.data.success) {
           console.log("Added to DB cart");
+          toast.success("Added to DB cart")
         }
       } else {
         // Guest: store in localStorage
         addToLocalCart(productId, quantity);
         console.log("Added to local cart");
+        toast.success("Added to local cart")
       }
     } catch (err) {
       console.error("Add to cart failed:", err);
+      toast.error("Add to cart:failed")
     }
   };
   return (

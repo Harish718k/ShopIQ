@@ -5,19 +5,28 @@ import { HomePage } from "./pages/HomePage"
 import { LoginPage } from "./pages/LoginPage"
 import { Toaster } from "react-hot-toast"
 import { useAuthStore } from "./store/AuthUser"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { LoaderCircle } from "lucide-react"
 import { HomeScreen } from "./pages/HomeScreen"
 import { ProductPage } from "./pages/ProductPage"
+import { mergeCartAfterLogin } from "./utils/mergeCart"
 
 function App() {
 
   const {user, isCheckingAuth, authCheck}=useAuthStore()
+  const hasMergedRef = useRef(false);
   console.log("auth user is here", user);
   
   useEffect(()=>{
     authCheck()
   },[])
+
+  useEffect(() => {
+  if (user?.isLoggedIn && !hasMergedRef.current) {
+    mergeCartAfterLogin();
+  }
+
+}, [user]);
 
   if(isCheckingAuth){
     return (

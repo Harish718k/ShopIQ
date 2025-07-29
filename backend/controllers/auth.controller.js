@@ -35,7 +35,8 @@ export async function signup(req,res){
             firstname:firstname,
             lastname:lastname,
             email:email,
-            password:hashedPassword
+            password:hashedPassword,
+            isLoggedIn:true
         })
 
         if(newUser){
@@ -76,6 +77,8 @@ export async function login(req,res){
         }
 
         generateTokenAndSetCookie(user._id, res);
+        user.isLoggedIn = true
+        await user.save({validateBeforeSave:false})
         res.status(200).json({success:true, user:{
             ...user._doc,
             password:""
@@ -90,6 +93,9 @@ export async function login(req,res){
 
 export async function logout(req,res){
     try {
+        const user = req.user
+        user.isLoggedIn = false
+        await user.save({validateBeforeSave:false})
         res.clearCookie("jwt-shopiq");
         res.status(200).json({success:true, message:"Logged out successfully"})
         

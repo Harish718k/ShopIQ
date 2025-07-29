@@ -1,13 +1,12 @@
 import axios from "axios";
 import { clearLocalCart, getLocalCart } from "./cart";
 
-async function mergeCartAfterLogin(){
-    const localCart = getLocalCart();
-
-    if(localCart.length===0) return;
-
+export async function mergeCartAfterLogin(){
     try {
-        const response = await axios.post('/api/v1/cart/merge', {localCart},{ withCredentials:true})
+        const localCart = getLocalCart();
+        if(!Array.isArray(localCart) || localCart.length===0) return;
+        
+        const response = await axios.put('/api/v1/cart/merge', {localCart},{ withCredentials:true})
 
         if(response.data.success){
             console.log("Cart merged!");

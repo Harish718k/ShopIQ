@@ -1,71 +1,3 @@
-// import { useEffect, useState } from "react"
-// import { useDispatch, useSelector } from "react-redux";
-// import { toast } from "react-toastify";
-// import { forgotPassword,clearAuthError } from "../../actions/userActions";
-
-// export default function ForgotPassword() {
-//     const [email, setEmail] = useState("");
-//     const dispatch = useDispatch();
-//     const { error, message } = useSelector(state => state.authState);
-
-//     const submitHandler = (e) => {
-//         e.preventDefault();
-//         const formData = new FormData();
-//         formData.append('email', email);
-//         dispatch(forgotPassword(formData))
-//     }
-
-//     useEffect(()=>{
-//         if(message) {
-//             toast(message, {
-//                 type: 'success',
-//                 // position: toast.POSITION.BOTTOM_CENTER
-//             })
-//             setEmail("");
-//             return;
-//         }
-
-//         if(error)  {
-//             toast(error, {
-//                 // position: toast.POSITION.BOTTOM_CENTER,
-//                 type: 'error',
-//                 onOpen: ()=> { dispatch(clearAuthError) }
-//             })
-//             return
-//         }
-//     }, [message, error, dispatch])
-
-
-//     return (
-//         <div className="row wrapper">
-//             <div className="col-10 col-lg-5">
-//                 <form onSubmit={submitHandler} className="shadow-lg">
-//                     <h1 className="mb-3">Forgot Password</h1>
-//                     <div className="form-group">
-//                         <label htmlFor="email_field">Enter Email</label>
-//                         <input
-//                             type="email"
-//                             id="email_field"
-//                             className="form-control"
-//                             value={email}
-//                             onChange={e=>setEmail(e.target.value)}
-//                         />
-//                     </div>
-
-//                     <button
-//                         id="forgot_password_button"
-//                         type="submit"
-//                         className="btn btn-block py-3">
-//                         Send Email
-//                 </button>
-
-//                 </form>
-//             </div>
-//         </div>
-//     )
-// }
-
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -104,20 +36,24 @@ export default function ForgotPassword() {
     }, [message, error, dispatch]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+        <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <h1 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">Forgot Password</h1>
+            <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <form onSubmit={submitHandler}>
-                    <h1 className="text-2xl font-semibold text-center mb-6">Forgot Password</h1>
 
                     <div className="mb-4">
-                        <label htmlFor="email_field" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="email_field" className="block text-sm font-medium text-gray-300 mb-1">
                             Enter your email
                         </label>
                         <input
                             type="email"
                             id="email_field"
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="block w-full px-3 py-2  bg-gray-700 border border-gray-600 
+									rounded-md shadow-sm
+									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
+									 focus:border-emerald-500 sm:text-sm"
                             value={email}
+                            placeholder='you@example.com'
                             onChange={e => setEmail(e.target.value)}
                         />
                     </div>
@@ -125,7 +61,7 @@ export default function ForgotPassword() {
                     <button
                         id="forgot_password_button"
                         type="submit"
-                        className="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+                        className="w-full bg-emerald-600 text-white py-2.5 rounded-md hover:bg-emerald-700 transition duration-300 disabled:opacity-50"
                     >
                         Send Email
                     </button>

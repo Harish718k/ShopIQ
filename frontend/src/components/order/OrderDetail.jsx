@@ -1,75 +1,106 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import  Loader from '../layouts/Loader';
-import {orderDetail as orderDetailAction } from '../../actions/orderActions';
-export default function OrderDetail () {
-    const { orderDetail, loading } = useSelector(state => state.orderState)
-    const { shippingInfo={}, user={}, orderStatus="Processing", orderItems=[], totalPrice=0, paymentInfo={} } = orderDetail;
-    const isPaid = paymentInfo && paymentInfo.status === "succeeded" ? true: false;
-    const dispatch = useDispatch();
-    const {id } = useParams();
+import Loader from '../layouts/Loader';
+import { orderDetail as orderDetailAction } from '../../actions/orderActions';
 
-    useEffect(() => {
-        dispatch(orderDetailAction(id))
-    },[id])
+export default function OrderDetail() {
+  const { orderDetail, loading } = useSelector(state => state.orderState);
+  const {
+    shippingInfo = {},
+    user = {},
+    orderStatus = 'Processing',
+    orderItems = [],
+    totalPrice = 0,
+    paymentInfo = {}
+  } = orderDetail;
 
-    return (
-        <Fragment>
-            {   loading ? <Loader/> :
-                <Fragment>
-                    <div className="row d-flex justify-content-between">
-                        <div className="col-12 col-lg-8 mt-5 order-details">
-    
-                            <h1 className="my-5">Order # {orderDetail._id}</h1>
-    
-                            <h4 className="mb-4">Shipping Info</h4>
-                            <p><b>Name:</b> {user.name}</p>
-                            <p><b>Phone:</b> {shippingInfo.phoneNo}</p>
-                            <p className="mb-4"><b>Address:</b>{shippingInfo.address}, {shippingInfo.city}, {shippingInfo.postalCode}, {shippingInfo.state}, {shippingInfo.country}</p>
-                            <p><b>Amount:</b> ${totalPrice}</p>
-    
-                            <hr />
-    
-                            <h4 className="my-4">Payment</h4>
-                            <p className={isPaid ? 'greenColor' : 'redColor' } ><b>{isPaid ? 'PAID' : 'NOT PAID' }</b></p>
-    
-    
-                            <h4 className="my-4">Order Status:</h4>
-                            <p className={orderStatus&&orderStatus.includes('Delivered') ? 'greenColor' : 'redColor' } ><b>{orderStatus}</b></p>
-    
-    
-                            <h4 className="my-4">Order Items:</h4>
-    
-                            <hr />
-                            <div className="cart-item my-1">
-                                {orderItems && orderItems.map(item => (
-                                    <div className="row my-5">
-                                        <div className="col-4 col-lg-2">
-                                            <img src={item.image} alt={item.name} height="45" width="65" />
-                                        </div>
+  const isPaid = paymentInfo && paymentInfo.status === 'succeeded';
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-                                        <div className="col-5 col-lg-5">
-                                            <Link to={`/product/${item.product}`}>{item.name}</Link>
-                                        </div>
+  useEffect(() => {
+    dispatch(orderDetailAction(id));
+  }, [id]);
 
+  return (
+    <Fragment>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="max-w-5xl mx-auto px-4 py-8">
+          <h1 className="text-2xl font-semibold text-emerald-300 mb-8">
+            Order #{orderDetail._id}
+          </h1>
 
-                                        <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                            <p>${item.price}</p>
-                                        </div>
+          {/* Shipping Info */}
+          <div className="bg-gray-700 p-6 rounded-lg shadow mb-6">
+            <h2 className="text-lg font-semibold text-gray-300 mb-4">
+              Shipping Info
+            </h2>
+            <p><span className="font-medium">Name:</span> {user.name}</p>
+            <p><span className="font-medium">Phone:</span> {shippingInfo.phoneNo}</p>
+            <p>
+              <span className="font-medium">Address:</span>{' '}
+              {shippingInfo.address}, {shippingInfo.city}, {shippingInfo.postalCode},{' '}
+              {shippingInfo.state}, {shippingInfo.country}
+            </p>
+            <p className="mt-2">
+              <span className="font-medium">Amount:</span> ${totalPrice}
+            </p>
+          </div>
 
-                                        <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                                            <p>{item.quantity} Piece(s)</p>
-                                        </div>
-                                    </div>
-                                ))}
-                                    
-                            </div>
-                            <hr />
-                        </div>
-                    </div>
-                </Fragment>
-            }
-        </Fragment>
-    )
+          {/* Payment Status */}
+          <div className="bg-gray-700 p-6 rounded-lg shadow mb-6">
+            <h2 className="text-lg font-semibold text-gray-300 mb-4">
+              Payment
+            </h2>
+            <p className={isPaid ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>
+              {isPaid ? 'PAID' : 'NOT PAID'}
+            </p>
+          </div>
+
+          {/* Order Status */}
+          <div className="bg-gray-700 p-6 rounded-lg shadow mb-6">
+            <h2 className="text-lg font-semibold text-gray-300 mb-4">
+              Order Status
+            </h2>
+            <p className={orderStatus.includes('Delivered') ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>
+              {orderStatus}
+            </p>
+          </div>
+
+          {/* Order Items */}
+          <div className="bg-gray-700 p-6 rounded-lg shadow">
+            <h2 className="text-lg font-semibold text-gray-300 mb-6">
+              Order Items
+            </h2>
+            <div className="space-y-6">
+              {orderItems.map((item, index) => (
+                <div key={index} className="flex items-center justify-between border-b pb-4">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                    <Link
+                      to={`/product/${item.product}`}
+                      className="text-emerald-600 hover:underline font-medium"
+                    >
+                      {item.name}
+                    </Link>
+                  </div>
+                  <div className="flex flex-col items-end text-right">
+                    <p className="text-gray-300">${item.price}</p>
+                    <p className="text-gray-200 text-sm">{item.quantity} Piece(s)</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </Fragment>
+  );
 }

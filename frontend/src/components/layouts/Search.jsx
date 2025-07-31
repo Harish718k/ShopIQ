@@ -74,12 +74,12 @@ export default function Search() {
         <input
           type="text"
           id="search_field"
-          className="flex-1 px-4 py-2 text-sm text-gray-800 outline-none"
+          className="flex-1 px-4 py-2 text-sm text-white outline-none"
           placeholder="Enter Product Name ..."
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
         />
-        <div  className="flex  items-center px-4 bg-primary text-white hover:bg-primary-dark cursor-pointer">
+        <div  className="flex  items-center px-4 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer">
           <button id="search_btn"  className="focus:outline-none" type="submit">
             <SearchIcon size={18} />
           </button>

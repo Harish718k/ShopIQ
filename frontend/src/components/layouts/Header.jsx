@@ -91,42 +91,49 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="bg-background border-b border-color shadow-sm w-full">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800">
+      <div className="container mx-auto flex items-center justify-between px-4 py-3">
         
         {/* Logo */}
-        <div className="flex items-center justify-center md:justify-start w-full md:w-1/3">
-          <Link to="/">
+          <Link to="/" className="flex items-center justify-center md:justify-start w-full md:w-1/12">
             <img src="/images/logo.png" alt="Logo" className="w-36" />
           </Link>
-        </div>
 
         {/* Search */}
-        <div className="w-full md:w-2/3 mt-4 md:mt-0 flex justify-center">
+        <div className="w-full md:w-2/6 mt-4 md:mt-0 flex justify-center">
            <Search />
         </div>
 
         {/* Cart + Dashboard + User */}
-        <div className="flex items-center justify-center md:justify-end gap-6 w-full md:w-1/3 mt-4 md:mt-0">
-          
+        <div className="flex items-center flex-wrap gap-4">
+          {/* Home */}
+          <Link
+							to={"/"}
+							className='text-gray-300 hover:text-emerald-400 transition duration-300
+					                ease-in-out'>
+							Home
+					</Link>
           {/* Cart */}
-          <Link to="/cart" className="relative text-copy text-sm font-medium flex items-center gap-1">
-            <ShoppingCart size={18} />
+          <Link to="/cart" className="relative group text-gray-300 hover:text-emerald-400 transition duration-300 
+							ease-in-out">
+            <ShoppingCart size={18} className='group-hover:text-emerald-400 inline-block mr-1'/>
             <span>Cart</span>
-            <span className="ml-1 bg-primary text-white text-xs font-bold rounded-full px-2 py-0.5">
+            <span className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 
+									text-xs group-hover:bg-emerald-400 transition duration-300 ease-in-out">
               {cartItems.length}
             </span>
           </Link>
 
           {/* Dashboard */}
           {isAuthenticated && user.role === 'admin' && (
-            <button
-              onClick={() => navigate('/admin/dashboard')}
-              className="text-sm font-medium text-copy hover:text-primary flex items-center gap-1 cursor-pointer"
-            >
-              <LayoutDashboard size={18} />
-              <span>Dashboard</span>
-            </button>
+            <Link
+								className='bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-md font-medium
+								 transition duration-300 ease-in-out flex items-center'
+								to={"/admin/dashboard"}
+							>
+								<LayoutDashboard className='inline-block mr-1' size={18} />
+								<span className='hidden sm:inline'>Dashboard</span>
+							</Link>
           )}
 
           {/* Authenticated */}
@@ -134,14 +141,14 @@ export default function Header() {
             <div className="relative" ref={avatarRef}>
               <button
                 onClick={() => setDropdownOpen(prev => !prev)}
-                className="flex items-center gap-2 text-copy focus:outline-none cursor-pointer"
+                className="flex items-center gap-2 text-copy focus:outline-none cursor-pointer text-white transition duration-300 ease-in-out"
               >
                 <img
                   src={user.avatar ?? '/images/default_avatar.png'}
                   alt="User Avatar"
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover border border-emerald-500"
                 />
-                <span className="hidden sm:inline text-sm font-medium">{user.name}</span>
+                <span className="hidden sm:inline text-white text-sm font-medium ml-1">{user.name}</span>
               </button>
 
               {dropdownOpen && (
@@ -187,7 +194,7 @@ export default function Header() {
           ) : (
             <Link
               to="/login"
-              className="bg-primary text-primary-content px-4 py-2 rounded-md text-sm hover:bg-primary-dark"
+              className="bg-emerald-500 text-white px-4 py-2 rounded-md text-sm hover:bg-emerald-600"
             >
               Login
             </Link>

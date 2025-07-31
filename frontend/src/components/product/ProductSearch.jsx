@@ -204,8 +204,8 @@ export default function ProductSearch() {
       "Laptops",
       "Accessories",
       "Headphones",
-    "Beauty/Health",
-    "Sports",
+      "Beauty/Health",
+      "Sports",
 ];
 
 const setCurrentPageNo = (pageNo) => {
@@ -275,7 +275,7 @@ const setCurrentPageNo = (pageNo) => {
                     {categories.map((category) => (
                       <li
                         key={category}
-                        className="cursor-pointer list-none text-gray-700 hover:text-primary transition"
+                        className="cursor-pointer list-none text-gray-300 hover:text-primary transition"
                         onClick={() => {
                           setCategory(category);
                         }}
@@ -293,7 +293,7 @@ const setCurrentPageNo = (pageNo) => {
 
               {/* Products */}
               <div className="w-full md:w-3/4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="flex flex-wrap gap-6">
                   {products &&
                     products.map((product) => (
                       <Product col={4} key={product._id} product={product} />

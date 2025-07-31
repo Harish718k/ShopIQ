@@ -143,9 +143,9 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    dispatch(getAdminProducts);
-    dispatch(getUsers);
-    dispatch(adminOrdersAction);
+    dispatch(getAdminProducts());
+    dispatch(getUsers());
+    dispatch(adminOrdersAction());
   }, []);
 
   return (

@@ -139,11 +139,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, clearAuthError } from '../../actions/userActions';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [userData, setUserData] = useState({
         name: "",
+        lastname: "",
         email: "",
         password: ""
     });
@@ -172,6 +173,7 @@ export default function Register() {
         e.preventDefault();
         const formData = new FormData();
         formData.append('name', userData.name);
+        formData.append('lastname', userData.lastname);
         formData.append('email', userData.email);
         formData.append('password', userData.password);
         formData.append('avatar', avatar);
@@ -194,46 +196,73 @@ export default function Register() {
     }, [error, isAuthenticated, dispatch, navigate]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+        <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <h1 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">Register</h1>
+            <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <form onSubmit={submitHandler} className="space-y-5" encType='multipart/form-data'>
-                    <h1 className="text-2xl font-semibold text-center mb-6">Register</h1>
 
                     <div>
-                        <label htmlFor="name_field" className="block text-sm font-medium text-gray-700">Name</label>
+                        <label htmlFor="name_field" className="block text-sm font-medium text-gray-300">First Name</label>
                         <input
                             name='name'
                             onChange={onChange}
                             type="text"
                             id="name_field"
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder='First Name'
+                            className="block w-full px-3 py-2  bg-gray-700 border border-gray-600 
+									rounded-md shadow-sm
+									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
+									 focus:border-emerald-500 sm:text-sm"
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="email_field" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="name_field" className="block text-sm font-medium text-gray-300">Last Name</label>
+                        <input
+                            name='lastname'
+                            onChange={onChange}
+                            type="text"
+                            id="name_field"
+                            placeholder='Last Name'
+                            className="block w-full px-3 py-2  bg-gray-700 border border-gray-600 
+									rounded-md shadow-sm
+									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
+									 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="email_field" className="block text-sm font-medium text-gray-300">Email</label>
                         <input
                             type="email"
                             id="email_field"
                             name='email'
                             onChange={onChange}
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder='you@example.com'
+                            className="block w-full px-3 py-2  bg-gray-700 border border-gray-600 
+									rounded-md shadow-sm
+									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
+									 focus:border-emerald-500 sm:text-sm"
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="password_field" className="block text-sm font-medium text-gray-700">Password</label>
+                        <label htmlFor="password_field" className="block text-sm font-medium text-gray-300">Password</label>
                         <input
                             name='password'
                             onChange={onChange}
                             type="password"
                             id="password_field"
-                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder='••••••••'
+                            className="block w-full px-3 py-2  bg-gray-700 border border-gray-600 
+									rounded-md shadow-sm
+									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
+									 focus:border-emerald-500 sm:text-sm"
                         />
                     </div>
 
                     <div>
-                        <label htmlFor='avatar_upload' className="block text-sm font-medium text-gray-700 mb-1">Avatar</label>
+                        <label htmlFor='avatar_upload' className="block text-sm font-medium text-gray-300 mb-1">Avatar</label>
                         <div className="flex items-center space-x-4">
                             <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-300">
                                 <img
@@ -242,7 +271,7 @@ export default function Register() {
                                     alt="Avatar Preview"
                                 />
                             </div>
-                            <label htmlFor="customFile" className="cursor-pointer bg-gray-100 px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition">
+                            <label htmlFor="customFile" className="cursor-pointer bg-gray-700 px-3 py-2 rounded-md text-sm text-gray-300 hover:bg-gray-600 transition">
                                 Choose Avatar
                                 <input
                                     type="file"
@@ -259,10 +288,15 @@ export default function Register() {
                         id="register_button"
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+                        className="w-full bg-emerald-600 text-white py-2.5 rounded-md hover:bg-emerald-700 transition duration-300 disabled:opacity-50"
                     >
                         REGISTER
                     </button>
+                    <div className="text-right mt-4">
+                           <Link to="/login" className="text-sm text-gray-600 hover:text-emerald-600">
+                                Already have an account?
+                            </Link>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,91 +1,10 @@
-// import { Fragment, useEffect} from 'react'
-// import MetaData from '../layouts/MetaData';
-// import DataTable from 'react-data-table-component';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { userOrders as userOrdersAction } from '../../actions/orderActions';
-// import { Link } from 'react-router-dom';
-
-// export default function UserOrders () {
-//     const { userOrders = []} = useSelector(state => state.orderState)
-//     const dispatch = useDispatch();
-
-//     useEffect(() => {
-//         dispatch(userOrdersAction)
-//     },[dispatch])
-
-//     const setOrders = () => {
-//         const data = {
-//             columns: [
-//                 {
-//                     label: "Order ID",
-//                     field: 'id',
-//                     sort: "asc"
-//                 },
-//                 {
-//                     label: "Number of Items",
-//                     field: 'numOfItems',
-//                     sort: "asc"
-//                 },
-//                 {
-//                     label: "Amount",
-//                     field: 'amount',
-//                     sort: "asc"
-//                 },
-//                 {
-//                     label: "Status",
-//                     field: 'status',
-//                     sort: "asc"
-//                 },
-//                 {
-//                     label: "Actions",
-//                     field: 'actions',
-//                     sort: "asc"
-//                 }
-//             ],
-//             rows:[]
-//         }
-
-//         userOrders.forEach(userOrder => {
-//             data.rows.push({
-//                 id:  userOrder._id,
-//                 numOfItems: userOrder.orderItems.length,
-//                 amount: `$${userOrder.totalPrice}`,
-//                 status: userOrder.orderStatus && userOrder.orderStatus.includes('Delivered') ?
-//                 (<p style={{color: 'green'}}> {userOrder.orderStatus} </p>):
-//                 (<p style={{color: 'red'}}> {userOrder.orderStatus} </p>),
-//                 actions: <Link to={`/order/${userOrder._id}`} className="btn btn-primary" >
-//                     <i className='fa fa-eye'></i>
-//                 </Link>
-//             })
-//         })
-
-
-//         return  data;
-//     }
-
-
-//     return (
-//         <Fragment>
-//             <MetaData title="My Orders" />
-//             <h1 className='mt-5'>My Orders</h1> 
-//             <DataTable
-//                 className='px-3'
-//                 bordered
-//                 striped
-//                 hover
-//                 data={setOrders()}
-//             />
-//         </Fragment>
-//     )
-// }
-
-
 import { Fragment, useEffect } from 'react';
 import MetaData from '../layouts/MetaData';
 import { useDispatch, useSelector } from 'react-redux';
 import { userOrders as userOrdersAction } from '../../actions/orderActions';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
+import { Eye } from 'lucide-react';
 
 export default function UserOrders() {
   const { userOrders = [] } = useSelector(state => state.orderState);
@@ -126,7 +45,7 @@ export default function UserOrders() {
         name: 'Actions',
         cell: row => (
           <Link to={`/order/${row.id}`} className="btn btn-primary">
-            <i className="fa fa-eye"></i>
+            <Eye />
           </Link>
         ),
       },
@@ -147,9 +66,9 @@ export default function UserOrders() {
   return (
     <Fragment>
       <MetaData title="My Orders" />
-      <h1 className="mt-5">My Orders</h1>
+      <h1 className="text-center text-3xl sm:text-4xl font-bold text-emerald-400 mb-8">My Orders</h1>
       <DataTable
-        className="px-3"
+        className="px-3 "
         columns={columns}
         data={rows}
         striped

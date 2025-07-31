@@ -3,9 +3,9 @@ const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncError = require('../middlewares/catchAsyncError')
 const APIFeatures = require('../utils/apiFeatures');
 
-//Get Products - /api/v1/products
+// Get Products - /api/v1/products
 // exports.getProducts = catchAsyncError(async (req, res, next)=>{
-//     const resPerPage = 4;
+//     const resPerPage = 8;
     
 //     let buildQuery = () => {
 //         return new APIFeatures(Product.find(), req.query).search().filter()
@@ -31,26 +31,22 @@ const APIFeatures = require('../utils/apiFeatures');
 
 
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-    const resPerPage = 4;
-    console.log(req.query);
+    const resPerPage = 8;
     
-    // Build the initial query instance
     const apiFeatures = new APIFeatures(Product.find(), req.query)
     .search()
     .filter();
     
-    console.log(req.query);
     const filteredProductsCount = await apiFeatures.query.clone().countDocuments();
-    console.log(req.query);
+    console.log(filteredProductsCount);
     
     const totalProductsCount = await Product.countDocuments();
-    console.log(req.query);
+    console.log(totalProductsCount);
     let productsCount = totalProductsCount;
     if (filteredProductsCount !== totalProductsCount) {
         productsCount = filteredProductsCount;
     }
 
-    // Now apply pagination to the same instance
     apiFeatures.paginate(resPerPage);
     const products = await apiFeatures.query;
 

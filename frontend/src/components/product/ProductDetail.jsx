@@ -209,6 +209,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
+import { Star } from "lucide-react";
 
 export default function ProductDetail() {
     const { loading, product = {}, isReviewSubmitted, error } = useSelector((state) => state.productState);
@@ -319,7 +320,7 @@ export default function ProductDetail() {
                                     readOnly
                                     className="count w-12 text-center border rounded"
                                 />
-                                <button onClick={increaseQty} className="px-3 py-1 bg-blue-500 text-white rounded">+</button>
+                                <button onClick={increaseQty} className="px-3 py-1 bg-emerald-500 text-white rounded">+</button>
                             </div>
 
                             <button
@@ -328,7 +329,7 @@ export default function ProductDetail() {
                                     dispatch(addCartItem(product._id, quantity));
                                     toast('Cart Item Added!', { type: 'success' });
                                 }}
-                                className="mt-2 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+                                className="mt-2 px-6 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 disabled:bg-gray-400"
                             >
                                 Add to Cart
                             </button>
@@ -350,7 +351,7 @@ export default function ProductDetail() {
                             {user ? (
                                 <button
                                     onClick={handleShow}
-                                    className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                                    className="mt-4 px-6 py-2 bg-emerald-600 text-gray-300 rounded hover:bg-emerald-700"
                                 >
                                     Submit Your Review
                                 </button>
@@ -365,7 +366,7 @@ export default function ProductDetail() {
                     {/* Review Modal */}
                     {show && (
                     <div className="fixed inset-0 bg-black/80 bg-opacity-40 flex items-center justify-center z-50">
-                        <div className="bg-white rounded-lg p-6 w-[90%] max-w-md shadow-lg">
+                        <div className="bg-gray-800 rounded-lg p-6 w-[90%] max-w-md shadow-lg">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-lg font-semibold">Submit Review</h2>
                             <button onClick={handleClose} className="text-gray-500 hover:text-gray-700">&times;</button>
@@ -378,7 +379,7 @@ export default function ProductDetail() {
                                 onClick={() => setRating(star)}
                                 className={`cursor-pointer text-2xl ${star <= rating ? 'text-orange-400' : 'text-gray-400'}`}
                             >
-                                <i className="fa fa-star"></i>
+                                <Star />
                             </li>
                             ))}
                         </ul>
@@ -393,7 +394,7 @@ export default function ProductDetail() {
                             <button
                             disabled={loading}
                             onClick={reviewHandler}
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                            className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700"
                             >
                             Submit
                             </button>

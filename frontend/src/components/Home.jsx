@@ -33,7 +33,7 @@ export  default function Home(){
             {loading ? <Loader/>:
                 <Fragment>
                     <MetaData title={'Buy Best Products'} />
-                    <h1 id="products_heading">Latest Products</h1>
+                    <h1 id="products_heading" className="text-center text-4xl sm:text-5xl font-bold text-emerald-400 mb-8">Latest Products</h1>
                     {/* <section id="products" className="container mt-5">
                         <div className="row">
                             { products && products.map(product => (
@@ -75,8 +75,8 @@ export  default function Home(){
                         lastPageText={'Last'}
                         innerClass="flex flex-wrap justify-center gap-2 mt-8"
                         itemClass=""
-                        linkClass="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-primary transition-colors"
-                        activeClass="bg-primary rounded-md text-white"
+                        linkClass="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-300 hover:bg-emerald-600 transition-colors"
+                        activeClass="bg-emerald-600 rounded-md text-white"
                         activeLinkClass="pointer-events-none"
                         />
                     </div>

@@ -14,7 +14,7 @@
 
       --color-background: #f0f0f0;
       --color-foreground: #fbfbfb;
-      --color-border: #dfdfdf;
+      --color-border: #3a89f0;
 
       --color-copy: #262626;
       --color-copy-light: #666666;
@@ -90,7 +90,35 @@
 
 
 
-
+/* Loader */
+.loader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  width: 80px;
+  height: 80px;
+  padding-left: 0;
+}
+.loader:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #0ba653;
+  border-color: #0ba053 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 
 

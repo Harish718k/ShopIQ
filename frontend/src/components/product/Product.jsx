@@ -107,34 +107,34 @@ export default function Product({ product, col }) {
 
   return (
     <div className={`w-full sm:w-1/2 ${colClass} px-3 mb-6`}>
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition p-4 flex flex-col h-full">
+      <div className="bg-dark-700 border border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition p-4 flex flex-col h-full">
         
         {/* Product Image */}
         {product.images.length > 0 && (
           <img
             src={product.images[0].image}
             alt={product.name}
-            className="w-full h-48 object-contain mb-4 rounded"
+            className="w-full h-48 object-cover mb-4 rounded"
           />
         )}
 
         {/* Product Info */}
         <div className="flex flex-col flex-grow">
-          <h5 className="text-base font-semibold text-gray-800 mb-2 line-clamp-2 min-h-12">
-            <Link to={`/product/${product._id}`} className="hover:text-blue-600 transition">
+          <h5 className="text-base font-semibold text-gray-300 mb-2 line-clamp-2 min-h-12">
+            <Link to={`/product/${product._id}`} className="hover:text-emerald-600 transition">
               {product.name}
             </Link>
           </h5>
 
           {/* Stock availability */}
           <p className={`text-sm font-medium mb-1 ${
-            product.stock > 0 ? 'text-green-600' : 'text-red-600'
+            product.stock > 0 ? 'text-green-500' : 'text-red-600'
           }`}>
             {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
           </p>
 
           {/* Price */}
-          <p className="text-blue-600 text-lg font-semibold mb-3">${product.price}</p>
+          <p className="text-white text-lg font-semibold mb-3">${product.price}</p>
 
           {/* Buttons */}
           <div className="flex gap-2 mt-auto">
@@ -150,7 +150,7 @@ export default function Product({ product, col }) {
                   dispatch(addCartItem(product._id, 1));
                   toast('Cart Item Added!', { type: 'success' });
               }}
-              className="w-1/2 text-sm bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-xl flex justify-center items-center gap-1 disabled:bg-gray-400 cursor-pointer"  
+              className="w-1/2 text-sm bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-3 rounded-xl flex justify-center items-center gap-1 disabled:bg-gray-400 cursor-pointer"
             >
               Add to Cart
             </button>

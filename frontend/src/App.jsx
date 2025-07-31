@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import Home from './components/Home';
 import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
@@ -55,7 +55,7 @@ function App() {
       <div className="App">
         <HelmetProvider>
             <Header/>
-                <div className='container container-fluid'>
+                <div className='w-full max-w-6xl mx-auto h-full p-4'>
                   <ToastContainer theme='dark' />
                   <Routes>
                       <Route path='/' element={<Home/>} />

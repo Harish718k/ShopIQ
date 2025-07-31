@@ -4,30 +4,63 @@ const catchAsyncError = require('../middlewares/catchAsyncError')
 const APIFeatures = require('../utils/apiFeatures');
 
 //Get Products - /api/v1/products
-exports.getProducts = catchAsyncError(async (req, res, next)=>{
-    const resPerPage = 4;
+// exports.getProducts = catchAsyncError(async (req, res, next)=>{
+//     const resPerPage = 4;
     
-    let buildQuery = () => {
-        return new APIFeatures(Product.find(), req.query).search().filter()
-    }
+//     let buildQuery = () => {
+//         return new APIFeatures(Product.find(), req.query).search().filter()
+//     }
     
-    const filteredProductsCount = await buildQuery().query.countDocuments({})
-    const totalProductsCount = await Product.countDocuments({});
-    let productsCount = totalProductsCount;
+//     const filteredProductsCount = await buildQuery().query.countDocuments({})
+//     const totalProductsCount = await Product.countDocuments({});
+//     let productsCount = totalProductsCount;
 
-    if(filteredProductsCount !== totalProductsCount) {
+//     if(filteredProductsCount !== totalProductsCount) {
+//         productsCount = filteredProductsCount;
+//     }
+    
+//     const products = await buildQuery().paginate(resPerPage).query;
+
+//     res.status(200).json({
+//         success : true,
+//         count: productsCount,
+//         resPerPage,
+//         products
+//     })
+// })
+
+
+exports.getProducts = catchAsyncError(async (req, res, next) => {
+    const resPerPage = 4;
+    console.log(req.query);
+    
+    // Build the initial query instance
+    const apiFeatures = new APIFeatures(Product.find(), req.query)
+    .search()
+    .filter();
+    
+    console.log(req.query);
+    const filteredProductsCount = await apiFeatures.query.clone().countDocuments();
+    console.log(req.query);
+    
+    const totalProductsCount = await Product.countDocuments();
+    console.log(req.query);
+    let productsCount = totalProductsCount;
+    if (filteredProductsCount !== totalProductsCount) {
         productsCount = filteredProductsCount;
     }
-    
-    const products = await buildQuery().paginate(resPerPage).query;
+
+    // Now apply pagination to the same instance
+    apiFeatures.paginate(resPerPage);
+    const products = await apiFeatures.query;
 
     res.status(200).json({
-        success : true,
+        success: true,
         count: productsCount,
         resPerPage,
-        products
-    })
-})
+        products,
+    });
+});
 
 //Create Product - /api/v1/product/new
 exports.newProduct = catchAsyncError(async (req, res, next)=>{
@@ -124,7 +157,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) =>{
         });
     }
 
-    await product.remove();
+    await product.deleteOne();
 
     res.status(200).json({
         success: true,

@@ -21,7 +21,7 @@ export  default function Home(){
     useEffect(()=>{
         if(error) {
             return toast.error(error,{
-                position: toast.POSITION.BOTTOM_CENTER
+                // position: toast.POSITION.BOTTOM_CENTER
             })
         }
         dispatch(getProducts(null, null, null, null, currentPage)) 
@@ -57,7 +57,7 @@ export  default function Home(){
                            />     
                     </div>*/}
                     <section id="products" className="max-w-screen-xl mx-auto mt-10 px-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div className="flex flex-wrap -mx-3">
                             {products && products.map(product => (
                             <Product col={3} key={product._id} product={product} />
                             ))}

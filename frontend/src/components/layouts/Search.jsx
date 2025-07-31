@@ -79,8 +79,8 @@ export default function Search() {
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
         />
-        <div className="flex items-center px-4 bg-primary text-white hover:bg-primary-dark cursor-pointer">
-          <button id="search_btn" className="focus:outline-none" type="submit">
+        <div  className="flex  items-center px-4 bg-primary text-white hover:bg-primary-dark cursor-pointer">
+          <button id="search_btn"  className="focus:outline-none" type="submit">
             <SearchIcon size={18} />
           </button>
         </div>

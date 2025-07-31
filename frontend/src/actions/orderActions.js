@@ -1,7 +1,7 @@
 import {adminOrdersFail, adminOrdersRequest, adminOrdersSuccess, createOrderFail, createOrderRequest, createOrderSuccess, deleteOrderFail, deleteOrderRequest, deleteOrderSuccess, orderDetailFail, orderDetailRequest, orderDetailSuccess, updateOrderFail, updateOrderRequest, updateOrderSuccess, userOrdersFail, userOrdersRequest, userOrdersSuccess } from '../slices/orderSlice';
 import axios from 'axios';
 
-export const createOrder = order => async(dispatch) => {
+export const createOrder = (order) => async(dispatch) => {
     try {
        dispatch(createOrderRequest())
        const {data} = await axios.post(`/api/v1/order/new`, order)
@@ -10,7 +10,7 @@ export const createOrder = order => async(dispatch) => {
         dispatch(createOrderFail(error.response.data.message))
     }
 }
-export const userOrders = async(dispatch) => {
+export const userOrders = ()=> async(dispatch) => {
     try {
        dispatch(userOrdersRequest())
        const {data} = await axios.get(`/api/v1/myorders`)
@@ -19,7 +19,7 @@ export const userOrders = async(dispatch) => {
         dispatch(userOrdersFail(error.response.data.message))
     }
 }
-export const orderDetail = id => async(dispatch) => {
+export const orderDetail = (id) => async(dispatch) => {
     try {
        dispatch(orderDetailRequest())
        const {data} = await axios.get(`/api/v1/order/${id}`)
@@ -29,7 +29,7 @@ export const orderDetail = id => async(dispatch) => {
     }
 }
 
-export const adminOrders = async(dispatch) => {
+export const adminOrders =()=> async(dispatch) => {
     try {
        dispatch(adminOrdersRequest())
        const {data} = await axios.get(`/api/v1/admin/orders`)
@@ -39,7 +39,7 @@ export const adminOrders = async(dispatch) => {
     }
 }
 
-export const deleteOrder = id => async(dispatch) => {
+export const deleteOrder = (id) => async(dispatch) => {
     try {
        dispatch(deleteOrderRequest())
        await axios.delete(`/api/v1/admin/order/${id}`)

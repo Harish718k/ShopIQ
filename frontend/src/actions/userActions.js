@@ -170,7 +170,7 @@ export const resetPassword = (formData, token) => async (dispatch) => {
 
 }
 
-export const getUsers =  async (dispatch) => {
+export const getUsers = ()=>  async (dispatch) => {
 
     try {
         dispatch(usersRequest())
@@ -182,7 +182,7 @@ export const getUsers =  async (dispatch) => {
 
 }
 
-export const getUser = id => async (dispatch) => {
+export const getUser = (id) => async (dispatch) => {
 
     try {
         dispatch(userRequest())
@@ -194,7 +194,7 @@ export const getUser = id => async (dispatch) => {
 
 }
 
-export const deleteUser = id => async (dispatch) => {
+export const deleteUser = (id) => async (dispatch) => {
 
     try {
         dispatch(deleteUserRequest())

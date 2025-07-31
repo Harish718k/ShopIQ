@@ -41,7 +41,7 @@
 //     useEffect(()=>{
 //         if(error) {
 //             return toast.error(error,{
-//                 position: toast.POSITION.BOTTOM_CENTER
+//                 // position: toast.POSITION.BOTTOM_CENTER
 //             })
 //         }
 //         dispatch(getProducts(keyword, priceChanged, category, rating, currentPage)) 
@@ -215,7 +215,7 @@ const setCurrentPageNo = (pageNo) => {
   useEffect(() => {
       if (error) {
           return toast.error(error, {
-              position: toast.POSITION.BOTTOM_CENTER,
+              // position: toast.POSITION.BOTTOM_CENTER,
             });
         }
         dispatch(getProducts(keyword, priceChanged, category, rating, currentPage));
@@ -288,28 +288,7 @@ const setCurrentPageNo = (pageNo) => {
 
                 <hr className="my-8 border-gray-300" />
 
-                {/* Ratings Filter */}
-                <div className="mt-5">
-                  <h4 className="mb-3 text-lg font-semibold">Ratings</h4>
-                  <ul className="pl-0 space-y-2">
-                    {[5, 4, 3, 2, 1].map((star) => (
-                      <li
-                        key={star}
-                        className="cursor-pointer list-none"
-                        onClick={() => {
-                          setRating(star);
-                        }}
-                      >
-                        <div className="bg-gray-200 rounded h-5 w-28 relative overflow-hidden">
-                          <div
-                            className="bg-yellow-400 h-full"
-                            style={{ width: `${star * 20}%` }}
-                          ></div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                
               </div>
 
               {/* Products */}

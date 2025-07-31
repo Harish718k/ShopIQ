@@ -1,32 +1,29 @@
-import express from "express";
-
-import authRoutes from './routes/auth.route.js'
-import productRoutes from './routes/product.route.js'
-import orderRoutes from './routes/order.route.js'
-
-import { ENV_VARS } from "./config/envVars.js";
-import { connectDB } from "./config/db.js";
-
-import { Product } from "./models/product.model.js";
-import cookieParser from "cookie-parser";
-import errorMiddleware from './middleware/error.js'
-
-const app = express()
-const PORT = ENV_VARS.PORT
-
-app.use(express.json())
-app.use(cookieParser()) 
-
-app.use("/api/v1",authRoutes)
-app.use("/api/v1",productRoutes)
-app.use("/api/v1",orderRoutes)
-
-app.use(errorMiddleware)
+const app = require('./app');
+const path = require('path');
+const connectDatabase = require('./config/database');
 
 
-app.listen(PORT, ()=>{
-    console.log("server started at: "+PORT);
-    connectDB();
+connectDatabase();
+
+const server = app.listen(process.env.PORT,()=>{
+    console.log(`My Server listening to the port: ${process.env.PORT} in  ${process.env.NODE_ENV} `)
 })
 
-//asHeyMa391JsJXKK
+process.on('unhandledRejection',(err)=>{
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to unhandled rejection error');
+    server.close(()=>{
+        process.exit(1);
+    })
+})
+
+process.on('uncaughtException',(err)=>{
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to uncaught exception error');
+    server.close(()=>{
+        process.exit(1);
+    })
+})
+
+
+

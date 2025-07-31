@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type:Number,
+        min:0,
         required:[true,"Please enter product price"]
     },
     description: {

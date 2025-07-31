@@ -279,7 +279,7 @@ export async function updateProfile(req,res){
 export async function getAllUser(req,res){
     try {
         const users = await User.find();
-        res.status(200).json({success:false, count:users.length, users})
+        res.status(200).json({success:true, count:users.length, users})
     } catch (error) {
         console.log("Error in updateProfile controller: "+error.message);
         res.status(500).json({success:false, message:"server error"})

@@ -37,15 +37,14 @@ export async function getSingleProduct(req,res,next){
     }
 }
 
+
+
+//admin
 export const newProduct = catchAsyncError(async (req,res)=>{
     const product = await Product.create(req.body);
     res.status(201).json({success:true, product})
     
 })
-
-
-
-//admin
 
 export async function updateProduct(req,res){
     try {

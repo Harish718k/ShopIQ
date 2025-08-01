@@ -88,11 +88,11 @@ export default function NewProduct() {
           <h1 className="text-2xl font-semibold mb-6">Create New Product</h1>
           <form
             onSubmit={submitHandler}
-            className="bg-white shadow-lg rounded-lg p-6 space-y-5"
+            className="bg-gray-00 shadow-lg rounded-lg p-6 space-y-5"
             encType="multipart/form-data"
           >
             <div>
-              <label className="block text-gray-700 mb-1">Name</label>
+              <label className="block text-gray-300 mb-1">Name</label>
               <input
                 type="text"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -102,7 +102,7 @@ export default function NewProduct() {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Price</label>
+              <label className="block text-gray-300 mb-1">Price</label>
               <input
                 type="text"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -112,7 +112,7 @@ export default function NewProduct() {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Description</label>
+              <label className="block text-gray-300 mb-1">Description</label>
               <textarea
                 rows="5"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -122,9 +122,9 @@ export default function NewProduct() {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Category</label>
+              <label className="block text-gray-300 mb-1">Category</label>
               <select
-                className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 border rounded-md bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -138,7 +138,7 @@ export default function NewProduct() {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Stock</label>
+              <label className="block text-gray-300 mb-1">Stock</label>
               <input
                 type="number"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -148,7 +148,7 @@ export default function NewProduct() {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Seller Name</label>
+              <label className="block text-gray-300 mb-1">Seller Name</label>
               <input
                 type="text"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -158,12 +158,12 @@ export default function NewProduct() {
             </div>
 
             <div>
-                <label className="block text-gray-700 mb-1">Product Images</label>
+                <label className="block text-gray-300 mb-1">Product Images</label>
 
                 <div className="relative w-full">
                     <label
                     htmlFor="file-upload"
-                    className="inline-block px-4 py-2 text-white bg-blue-600 rounded-md cursor-pointer hover:bg-blue-700 transition"
+                    className="inline-block px-4 py-2 text-white bg-emerald-600 rounded-md cursor-pointer hover:bg-emerald-700 transition"
                     >
                     Choose Images
                     </label>

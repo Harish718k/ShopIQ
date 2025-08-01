@@ -77,7 +77,7 @@ function App() {
                           <Route path='/password/forgot' element={<ForgotPassword/> } />
                           <Route path='/password/reset/:token' element={<ResetPassword/> } />
                           <Route path='/cart' element={<Cart/> } />
-                          <Route path='/shipping' element={<ProtectedRoute><Shipping/></ProtectedRoute> } />
+                          <Route path='/order/shipping' element={<ProtectedRoute><Shipping/></ProtectedRoute> } />
                           <Route path='/order/confirm' element={<ProtectedRoute><ConfirmOrder/></ProtectedRoute> } />
                           <Route path='/order/success' element={<ProtectedRoute><OrderSuccess/></ProtectedRoute> } />
                           <Route path='/orders' element={<ProtectedRoute><UserOrders/></ProtectedRoute> } />

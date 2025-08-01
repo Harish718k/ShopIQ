@@ -1,65 +1,3 @@
-// import React from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import Search from './Search';
-// import {useDispatch, useSelector} from 'react-redux';
-// import {DropdownButton, Dropdown, Image} from 'react-bootstrap';
-// import { logout } from '../../actions/userActions';
-
-
-// export default function Header () {
-//     const { isAuthenticated, user } = useSelector(state => state.authState);
-//     const { items:cartItems } = useSelector(state => state.cartState)
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-//     const logoutHandler = () => {
-//       dispatch(logout);
-//     }
-
-
-//     return (
-//     <nav className="navbar row flex">
-//         <div className="col-12 col-md-3">
-//           <div className="navbar-brand">
-//             <Link to="/">
-//               <img width="150px" alt='JVLcart Logo' src="/images/logo.png" />
-//             </Link>
-//             </div>
-//         </div>
-  
-//         <div className="col-12 col-md-6 mt-2 mt-md-0">
-//            <Search/>
-//         </div>
-  
-//         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-//           <Link to="/cart"><span id="cart" className="ml-3">Cart</span></Link>
-//           <span className="ml-1" id="cart_count">{cartItems.length}</span>
-//           { isAuthenticated ? 
-//             (
-//               <Dropdown className='d-inline' >
-//                   <Dropdown.Toggle variant='default text-white pr-5' id='dropdown-basic'>
-//                     <figure className='avatar avatar-nav'>
-//                       <Image width="50px" src={user.avatar??'./images/default_avatar.png'}  />
-//                     </figure>
-//                     <span>{user.name}</span>
-//                   </Dropdown.Toggle>
-//                   <Dropdown.Menu>
-//                       { user.role === 'admin' && <Dropdown.Item onClick={() => {navigate('admin/dashboard')}} className='text-dark'>Dashboard</Dropdown.Item> }
-//                       <Dropdown.Item onClick={() => {navigate('/myprofile')}} className='text-dark'>Profile</Dropdown.Item>
-//                       <Dropdown.Item onClick={() => {navigate('/orders')}} className='text-dark'>Orders</Dropdown.Item>
-//                       <Dropdown.Item onClick={logoutHandler} className='text-danger'>Logout</Dropdown.Item>
-//                   </Dropdown.Menu>
-//               </Dropdown>
-//             )
-          
-//           :
-//             <Link to="/login"  className="btn" id="login_btn">Login</Link>
-//           }
-          
-//         </div>
-//     </nav>
-//     )
-// }
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -95,17 +33,17 @@ export default function Header() {
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         
         {/* Logo */}
-          <Link to="/" className="flex items-center justify-center md:justify-start w-full md:w-1/12">
-            <img src="/images/logo.png" alt="Logo" className="w-36" />
+          <Link to="/" className="flex items-center justify-center md:justify-start w-full">
+            <img src="/images/brandlogo.png" alt="Logo" className="w-36" />
           </Link>
 
         {/* Search */}
-        <div className="w-full md:w-2/6 mt-4 md:mt-0 flex justify-center">
+        <div className="w-full mt-4 md:mt-0 flex justify-center">
            <Search />
         </div>
 
         {/* Cart + Dashboard + User */}
-        <div className="flex items-center flex-wrap gap-4">
+        <div className="flex items-center justify-end flex-wrap gap-4 w-full">
           {/* Home */}
           <Link
 							to={"/"}
@@ -114,12 +52,13 @@ export default function Header() {
 							Home
 					</Link>
           {/* Cart */}
-          <Link to="/cart" className="relative group text-gray-300 hover:text-emerald-400 transition duration-300 
-							ease-in-out">
+          <Link to="/cart" className="relative group text-gray-300 hover:text-emerald-400 transition duration-300
+					                ease-in-out
+							">
             <ShoppingCart size={18} className='group-hover:text-emerald-400 inline-block mr-1'/>
             <span>Cart</span>
             <span className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 
-									text-xs group-hover:bg-emerald-400 transition duration-300 ease-in-out">
+									text-xs group-hover:bg-emerald-400 transition duration-300">
               {cartItems.length}
             </span>
           </Link>

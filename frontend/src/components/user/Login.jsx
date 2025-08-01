@@ -106,12 +106,14 @@ export default function Login() {
 
     useEffect(() => {
         if (isAuthenticated) {
-        if (user?.role === 'admin') {
-            navigate('/admin/dashboard');
+        if (user?.isblocked) {
+        navigate('/blocked');
+        } else if (user?.role === 'admin') {
+        navigate('/admin/dashboard');
         } else {
-            navigate(redirect);
+        navigate(redirect);
         }
-    }
+        }
 
         if (error) {
             toast(error, {

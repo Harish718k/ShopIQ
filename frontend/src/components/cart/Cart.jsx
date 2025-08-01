@@ -26,7 +26,7 @@ export default function Cart() {
   };
 
   const checkoutHandler = () => {
-    navigate('/order/shipping');
+    navigate('/shipping');
   };
 
   return (

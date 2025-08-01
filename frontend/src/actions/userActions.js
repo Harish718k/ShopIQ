@@ -37,8 +37,13 @@ import {
     deleteUserFail,
     updateUserRequest,
     updateUserSuccess,
-    updateUserFail
-
+    updateUserFail,
+    impersonateUserRequest,
+    impersonateUserSuccess,
+    impersonateUserFail,
+    revertToAdminRequest,
+    revertToAdminSuccess,
+    revertToAdminFail,
 } from '../slices/userSlice'
 import axios from 'axios';
 
@@ -222,3 +227,27 @@ export const updateUser = (id, formData) => async (dispatch) => {
     }
 
 }
+
+
+export const impersonateUser = (id) => async (dispatch) => {
+  try {
+    dispatch(impersonateUserRequest());
+    const { data } = await axios.post(`/api/v1/admin/impersonate/${id}`);
+    dispatch(impersonateUserSuccess(data));
+    window.location.href = "/";
+  } catch (error) {
+    dispatch(impersonateUserFail(error.response.data.message));
+  }
+};
+
+
+export const revertToAdmin = () => async (dispatch) => {
+  try {
+    dispatch(revertToAdminRequest());
+    const {data} = await axios.post(`/api/v1/admin/revert`);
+    dispatch(revertToAdminSuccess(data));
+    window.location.href = "/admin/dashboard"; // redirect back to admin
+  } catch (error) {
+    dispatch(revertToAdminFail(error.response.data.message));
+  }
+};

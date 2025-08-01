@@ -39,6 +39,8 @@ import UpdateOrder from './components/admin/UpdateOrder';
 import UserList from './components/admin/UserList';
 import UpdateUser from './components/admin/UpdateUser';
 import ReviewList from './components/admin/ReviewList';
+import { Blocked } from './components/user/Blocked';
+import ImpersonationBanner from './components/admin/ImpersonationBanner';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("")
@@ -62,6 +64,7 @@ function App() {
           <Router>
             <HelmetProvider>
                 <Header/>
+                <ImpersonationBanner/>
                     <div className='w-full max-w-6xl mx-auto h-full p-4'>
                       <ToastContainer theme='dark' />
                       <Toaster position="top-center" reverseOrder={false} />
@@ -70,6 +73,7 @@ function App() {
                           <Route path='/search/:keyword' element={<ProductSearch/>} />
                           <Route path='/product/:id' element={<ProductDetail/>} />
                           <Route path='/login' element={<Login/>} />
+                          <Route path='/blocked' element={<Blocked/>} />
                           <Route path='/register' element={<Register/>} />
                           <Route path='/myprofile' element={<ProtectedRoute><Profile/></ProtectedRoute> } />
                           <Route path='/myprofile/update' element={<ProtectedRoute><UpdateProfile/></ProtectedRoute> } />
@@ -77,7 +81,7 @@ function App() {
                           <Route path='/password/forgot' element={<ForgotPassword/> } />
                           <Route path='/password/reset/:token' element={<ResetPassword/> } />
                           <Route path='/cart' element={<Cart/> } />
-                          <Route path='/order/shipping' element={<ProtectedRoute><Shipping/></ProtectedRoute> } />
+                          <Route path='/shipping' element={<ProtectedRoute><Shipping/></ProtectedRoute> } />
                           <Route path='/order/confirm' element={<ProtectedRoute><ConfirmOrder/></ProtectedRoute> } />
                           <Route path='/order/success' element={<ProtectedRoute><OrderSuccess/></ProtectedRoute> } />
                           <Route path='/orders' element={<ProtectedRoute><UserOrders/></ProtectedRoute> } />

@@ -82,10 +82,8 @@ const productSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId
     }
     ,
-    createdAt:{
-        type: Date,
-        default: Date.now()
-    }
+},{
+  timestamps: true
 })
 
 let schema = mongoose.model('Product', productSchema)

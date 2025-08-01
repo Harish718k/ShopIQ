@@ -7,9 +7,11 @@ import { clearError, clearUserUpdated } from "../../slices/userSlice";
 import { toast } from "react-toastify";
 
 export default function UpdateUser() {
-  const [name, setName] = useState("");
+  const [name, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [isblocked, setIsBlocked] = useState(false);
 
   const { id: userId } = useParams();
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ export default function UpdateUser() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("lastname", lastname);
     formData.append("email", email);
+    formData.append("isblocked", isblocked);
     formData.append("role", role);
     dispatch(updateUser(userId, formData));
   };
@@ -48,9 +52,11 @@ export default function UpdateUser() {
 
   useEffect(() => {
     if (user._id) {
-      setName(user.name);
+      setFirstName(user.name);
+      setLastName(user.lastname);
       setEmail(user.email);
       setRole(user.role);
+      setIsBlocked(user.isblocked);
     }
   }, [user]);
 
@@ -68,14 +74,27 @@ export default function UpdateUser() {
             <form onSubmit={submitHandler} className="space-y-5">
               <div>
                 <label htmlFor="name_field" className="block text-sm font-medium text-gray-400 mb-1">
-                  Name
+                  First Name
                 </label>
                 <input
                   type="text"
                   id="name_field"
                   className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="name_field" className="block text-sm font-medium text-gray-400 mb-1">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="Lastname_field"
+                  className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
 
@@ -90,6 +109,20 @@ export default function UpdateUser() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="block_toggle"
+                  checked={isblocked}
+                  onChange={(e) => setIsBlocked(e.target.checked)}
+                  className="h-4 w-4 text-red-600 focus:ring-emerald-500 border-gray-300 rounded"
+                  disabled={role === "admin"} //Disable if role is admin
+                />
+                <label htmlFor="block_toggle" className="text-sm text-gray-300">
+                  Block this user
+                </label>
               </div>
 
               <div>

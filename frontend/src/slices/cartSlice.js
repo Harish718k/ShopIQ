@@ -16,26 +16,19 @@ const cartSlice = createSlice({
                 loading: true
             }
         },
-        addCartItemSuccess(state, action){
-            const item = action.payload
+        addCartItemSuccess(state, action) {
+            const item = action.payload;
 
-            const isItemExist = state.items.find( i => i.product === item.product);
-            
-            if(isItemExist) {
-                state = {
-                    ...state,
-                    loading: false,
-                }
-            }else{
-                state = {
-                    items: [...state.items, item],
-                    loading: false
-                }
-                
-                localStorage.setItem('cartItems', JSON.stringify(state.items));
+            const isItemExist = state.items.find(i => i.product === item.product);
+
+            if (isItemExist) {
+                isItemExist.quantity += item.quantity || 1;
+            } else {
+                state.items.push({ ...item, quantity: item.quantity || 1 });
             }
-            return state
-            
+
+            state.loading = false;
+            localStorage.setItem('cartItems', JSON.stringify(state.items));
         },
         increaseCartItemQty(state, action) {
             state.items = state.items.map(item => {

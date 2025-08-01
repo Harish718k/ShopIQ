@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { LayoutDashboard } from 'lucide-react';
+import { ChevronDown, ChevronUp, LayoutDashboard } from 'lucide-react';
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -27,7 +27,11 @@ export default function Sidebar() {
               className="flex items-center w-full text-gray-300 hover:bg-emerald-600 px-3 py-2 rounded transition"
             >
               Product
-              <i className={`ml-auto fa fa-chevron-${isProductMenuOpen ? 'up' : 'down'}`}></i>
+              {isProductMenuOpen ? (
+                <ChevronUp className="ml-auto w-4 h-4" />
+              ) : (
+                <ChevronDown className="ml-auto w-4 h-4" />
+              )}
             </button>
             {isProductMenuOpen && (
               <ul className="ml-6 mt-2 space-y-1">

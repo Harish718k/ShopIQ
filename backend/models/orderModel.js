@@ -93,10 +93,8 @@ const orderSchema = mongoose.Schema({
         required: true,
         default: 'Processing'
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+},{
+  timestamps: true
 })
 
 let orderModel = mongoose.model('Order', orderSchema);

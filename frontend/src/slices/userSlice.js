@@ -104,6 +104,46 @@ const userSlice = createSlice({
                 isUserUpdated : false
             }
         },
+        impersonateUserRequest(state, action){
+            return {
+                ...state,
+                loading: true
+            }
+        },
+        impersonateUserSuccess(state, action){
+            return {
+                ...state,
+                loading: false,
+                user: action.payload.user
+            }
+        },
+        impersonateUserFail(state, action){
+            return {
+                ...state,
+                loading: false,
+                error:  action.payload
+            }
+        },
+        revertToAdminRequest(state, action) {
+            return {
+                ...state,
+                loading: true
+            };
+        },
+        revertToAdminSuccess(state, action) {
+            return {
+                ...state,
+                loading: false,
+                user: action.payload.user
+            };
+        },  
+        revertToAdminFail(state, action) {
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+        },
         clearError(state, action){
             return {
                 ...state,
@@ -129,6 +169,12 @@ export const {
     updateUserRequest,
     updateUserSuccess,
     updateUserFail,
+    impersonateUserRequest,
+    impersonateUserSuccess,
+    impersonateUserFail,
+    revertToAdminRequest,
+    revertToAdminSuccess,
+    revertToAdminFail,
     clearUserDeleted,
     clearUserUpdated,
     clearError

@@ -218,24 +218,47 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
 });
 
 //Admin: Update User - api/v1/admin/user/:id
-exports.updateUser = catchAsyncError(async (req, res, next) => {
-    const newUserData = {
-        name: req.body.name,
-        lastname:req.body.lastname,
-        email: req.body.email,
-        role: req.body.role
+// exports.updateUser = catchAsyncError(async (req, res, next) => {
+//     const newUserData = {
+//         name: req.body.name,
+//         lastname:req.body.lastname,
+//         email: req.body.email,
+//         role: req.body.role
+//     }
+
+//     const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+//         new: true,
+//         runValidators: true,
+//     })
+
+//     res.status(200).json({
+//         success: true,
+//         user
+//     })
+// })
+
+exports.updateUser = async (req, res, next) => {
+  const { name, email, role } = req.body;
+
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  // Update fields
+  if (name) user.name = name;
+  if (email) user.email = email;
+  if (role) user.role = role;
+  if ('isblocked' in req.body) {
+    user.isblocked = String(req.body.isblocked) === "true";
     }
 
-    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
-        new: true,
-        runValidators: true,
-    })
+  await user.save();
 
-    res.status(200).json({
-        success: true,
-        user
-    })
-})
+  res.status(200).json({
+    success: true,
+    message: "User updated successfully",
+    user,
+  });
+};
 
 //Admin: Delete User - api/v1/admin/user/:id
 exports.deleteUser = catchAsyncError(async (req, res, next) => {
@@ -248,3 +271,49 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
         success: true,
     })
 })
+
+// Admin: Impersonate - /api/v1/admin/impersonate/:id
+exports.impersonateUser = catchAsyncError(async (req, res, next) => {
+  const admin = req.user; // Already authenticated
+
+  if (admin.role !== "admin") {
+    return next(new ErrorHandler("Only admins can impersonate users", 403));
+  }
+
+  const userToImpersonate = await User.findById(req.params.id);
+
+  if (!userToImpersonate) {
+    return next(new ErrorHandler("User not found", 404));
+  }
+
+  // Set a cookie to remember who the original admin was
+  res.cookie("originalAdmin", admin._id.toString(), {
+    httpOnly: false, // Allow client-side access
+    sameSite: "Strict",
+    maxAge: 30 * 60 * 1000,
+  });
+
+  
+  sendToken(userToImpersonate, 200, res);
+});
+
+// Admin: revert Impersonate - /api/v1/admin/revert
+exports.revertToAdmin = catchAsyncError(async (req, res, next) => {
+  const originalAdminId = req.cookies.originalAdmin;
+
+  if (!originalAdminId) {
+    return next(new ErrorHandler("No impersonation session to revert", 400));
+  }
+
+  const originalAdmin = await User.findById(originalAdminId);
+
+  if (!originalAdmin || originalAdmin.role !== "admin") {
+    return next(new ErrorHandler("Original admin not found", 404));
+  }
+
+  // Clear the impersonation cookie
+  res.clearCookie("originalAdmin");
+
+  // Restore session as admin
+  sendToken(originalAdmin, 200, res);
+});

@@ -2,11 +2,11 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteUser, getUsers } from "../../actions/userActions";
+import { deleteUser, getUsers, impersonateUser } from "../../actions/userActions";
 import { clearError, clearUserDeleted } from "../../slices/userSlice";
 import Loader from "../layouts/Loader";
 import DataTable from "react-data-table-component";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Sidebar from "./Sidebar";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -23,19 +23,26 @@ export default function UserList() {
       name: user.name,
       email: user.email,
       role: user.role,
+      isblocked: user.isblocked,
       actions: (
         <div className="flex gap-2">
           <Link
             to={`/admin/user/${user._id}`}
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 hover:underline border-l border-r px-1"
           >
             <Pencil className="w-5 h-5 inline" />
           </Link>
           <button
             onClick={(e) => deleteHandler(e, user._id)}
-            className="text-red-600 hover:underline"
+            className="text-red-600 hover:underline border-l border-r px-1 cursor-pointer"
           >
             <Trash2 className="w-5 h-5 inline" />
+          </button>
+          <button
+            className="text-indigo-600 hover:underline border-l border-r px-1 cursor-pointer"
+            onClick={() => handleImpersonate(user._id, user.role)}
+          >
+            Impersonate
           </button>
         </div>
       ),
@@ -62,19 +69,36 @@ export default function UserList() {
       name: "Role",
       selector: (row) => row.role,
       sortable: true,
+    },{
+      name: "Status",
+      selector: (row) => row.isblocked ? "Blocked" : "Active",
+      sortable: true,
+      cell: (row) => (
+        <p className={row.isblocked ? "text-red-600" : "text-green-500"}>
+          {row.isblocked ? "Blocked" : "Active"}
+        </p>
+      ),
     },
     {
       name: "Actions",
       cell: (row) => row.actions,
       ignoreRowClick: true,
       allowOverflow: true,
-      button: true,
     },
   ];
 
   const deleteHandler = (e, id) => {
     e.target.disabled = true;
     dispatch(deleteUser(id));
+  };
+
+  const handleImpersonate = (userId, userRole) => {
+
+    if (userRole === "admin") {
+      return toast.error("You cannot impersonate another admin.");
+    }
+
+    dispatch(impersonateUser(userId));
   };
 
   useEffect(() => {

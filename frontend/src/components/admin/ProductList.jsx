@@ -157,7 +157,7 @@ export default function ProductList() {
         },
         {
           name: "Stock",
-          selector: (row) => row.stock,
+          selector: (row) => row.stock !==0 ? row.stock : (<p className="text-red-600">{row.stock}</p>),
           sortable: true,
         },
         {

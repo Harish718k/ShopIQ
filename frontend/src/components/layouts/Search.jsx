@@ -55,6 +55,9 @@ export default function Search() {
 
   const searchHandler = (e) => {
     e.preventDefault();
+    if (!keyword.trim()) {
+      return;
+    }
     navigate(`/search/${keyword}`);
   };
 
@@ -70,20 +73,18 @@ export default function Search() {
 
   return (
     <form onSubmit={searchHandler}>
-      <div className="flex w-full max-w-md border border-gray-300 rounded-md overflow-hidden">
+      <div className="flex w-full border border-gray-300 rounded-md overflow-hidden">
         <input
           type="text"
           id="search_field"
-          className="flex-1 px-4 py-2 text-sm text-white outline-none"
+          className="flex-1 px-4 py-2 text-sm text-white outline-none md:w-md"
           placeholder="Enter Product Name ..."
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
         />
-        <div  className="flex  items-center px-4 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer">
-          <button id="search_btn"  className="focus:outline-none" type="submit">
+          <button id="search_btn"  className="focus:outline-none flex  items-center px-4 bg-emerald-500 text-white hover:bg-emerald-600 cursor-pointer" type="submit">
             <SearchIcon size={18} />
           </button>
-        </div>
       </div>
     </form>
   );

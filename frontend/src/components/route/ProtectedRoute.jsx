@@ -9,6 +9,10 @@ export default function ProtectedRoute ({children, isAdmin}) {
         return <Navigate to="/login" />
     }
 
+    if(!loading && isAuthenticated && user.isblocked) {
+        return <Navigate to="/blocked" />
+    }   
+
     if(isAuthenticated) {
         if(isAdmin === true  && user.role !== 'admin') {
             return <Navigate to="/" />

@@ -24,10 +24,13 @@ const {
     getAllUsers,
     getUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    impersonateUser,
+    revertToAdmin
  } = require('../controllers/authController');
 const router = express.Router();
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/authenticate')
+const isImpersonating = require('../middlewares/isImpersonating');
 
 router.route('/register').post(upload.single('avatar'), registerUser);
 router.route('/login').post(loginUser);
@@ -43,6 +46,8 @@ router.route('/admin/users').get(isAuthenticatedUser,authorizeRoles('admin'), ge
 router.route('/admin/user/:id').get(isAuthenticatedUser,authorizeRoles('admin'), getUser)
                                 .put(isAuthenticatedUser,authorizeRoles('admin'), updateUser)
                                 .delete(isAuthenticatedUser,authorizeRoles('admin'), deleteUser);
+router.route('/admin/impersonate/:id').post( isAuthenticatedUser,authorizeRoles('admin'),impersonateUser)
+router.route('/admin/revert').post(isAuthenticatedUser, isImpersonating,revertToAdmin);
 
 
 module.exports = router;

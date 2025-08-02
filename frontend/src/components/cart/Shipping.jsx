@@ -4,7 +4,7 @@ import { countries } from "countries-list";
 import { saveShippingInfo } from "../../slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "./CheckoutStep";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export const validateShipping = (shippingInfo, navigate) => {
   if (
@@ -15,9 +15,7 @@ export const validateShipping = (shippingInfo, navigate) => {
     !shippingInfo.phoneNo ||
     !shippingInfo.postalCode
   ) {
-    toast.error("Please fill the shipping information", {
-      // position: toast.POSITION.BOTTOM_CENTER,
-    });
+    toast.error("Please fill all the fields");
     navigate("/shipping");
   }
 };

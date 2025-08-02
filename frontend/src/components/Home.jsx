@@ -4,7 +4,7 @@ import { getProducts } from "../actions/productActions";
 import Loader from "./layouts/Loader";
 import MetaData from "./layouts/MetaData";
 import Product from "./product/Product";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Pagination from "react-js-pagination";
 
 export default function Home() {
@@ -21,12 +21,10 @@ export default function Home() {
   const [category, setCategory] = useState(null);
 
   const categories = [
-    "Electronics",
     "Mobile Phones",
     "Laptops",
     "Accessories",
     "Headphones",
-    "Beauty/Health",
     "Sports",
   ];
 
@@ -57,12 +55,26 @@ export default function Home() {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
+            <button
+              onClick={() => {
+                setCategory(null);
+                setCurrentPage(1);
+              }}
+              className={`px-4 py-2 text-sm border rounded-md transition ${
+                category === null
+                  ? "bg-emerald-600 text-white border-emerald-600"
+                  : "bg-white text-gray-600 border-gray-300 hover:bg-emerald-100"
+              }`}
+            >
+              All Products
+            </button>
+
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => {
-                  setCategory(cat === category ? null : cat); // Toggle
-                  setCurrentPage(1); // Reset to page 1
+                  setCategory(cat);
+                  setCurrentPage(1);
                 }}
                 className={`px-4 py-2 text-sm border rounded-md transition ${
                   category === cat

@@ -4,9 +4,7 @@ import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-import { ToastContainer } from 'react-toastify';
 import { Toaster } from 'react-hot-toast';
-import 'react-toastify/dist/ReactToastify.css';
 import ProductDetail from './components/product/ProductDetail';
 import ProductSearch from './components/product/ProductSearch';
 import Login from './components/user/Login';
@@ -41,7 +39,6 @@ import UpdateUser from './components/admin/UpdateUser';
 import ReviewList from './components/admin/ReviewList';
 import { Blocked } from './components/user/Blocked';
 import ImpersonationBanner from './components/admin/ImpersonationBanner';
-import { Settings } from './components/admin/Settings';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("")
@@ -67,7 +64,6 @@ function App() {
                 <Header/>
                 <ImpersonationBanner/>
                     <div className='w-full max-w-6xl mx-auto h-full p-4'>
-                      <ToastContainer theme='dark' />
                       <Toaster position="top-center" reverseOrder={false} />
                       <Routes>
                           <Route path='/' element={<Home/>} />
@@ -93,6 +89,7 @@ function App() {
                     </div>
                     {/* Admin Routes */}
                     <Routes>
+                      <Route path='/admin' element={<ProtectedRoute isAdmin={true}><Dashboard/></ProtectedRoute> } />
                       <Route path='/admin/dashboard' element={ <ProtectedRoute isAdmin={true}><Dashboard/></ProtectedRoute> } />
                       <Route path='/admin/products' element={ <ProtectedRoute isAdmin={true}><ProductList/></ProtectedRoute> } />
                       <Route path='/admin/products/create' element={ <ProtectedRoute isAdmin={true}><NewProduct/></ProtectedRoute> } />
@@ -102,8 +99,7 @@ function App() {
                       <Route path='/admin/users' element={ <ProtectedRoute isAdmin={true}><UserList/></ProtectedRoute> } />
                       <Route path='/admin/user/:id' element={ <ProtectedRoute isAdmin={true}><UpdateUser/></ProtectedRoute> } />
                       <Route path='/admin/reviews' element={ <ProtectedRoute isAdmin={true}><ReviewList/></ProtectedRoute> } />
-                      <Route path='/admin/settings' element={ <ProtectedRoute isAdmin={true}><Settings/></ProtectedRoute> } />
-                    </Routes>
+                      </Routes>
             </HelmetProvider>
           </Router>
         </div>

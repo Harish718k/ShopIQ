@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { getUser, updateUser } from "../../actions/userActions";
 import { clearError, clearUserUpdated } from "../../slices/userSlice";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function UpdateUser() {
   const [name, setFirstName] = useState("");
@@ -32,18 +32,14 @@ export default function UpdateUser() {
 
   useEffect(() => {
     if (isUserUpdated) {
-      toast("User Updated Successfully!", {
-        type: "success",
-        onOpen: () => dispatch(clearUserUpdated()),
-      });
+      dispatch(clearUserUpdated());
+      toast.success("User Updated Successfully");
       return;
     }
 
     if (error) {
-      toast(error, {
-        type: "error",
-        onOpen: () => dispatch(clearError()),
-      });
+      dispatch(clearError());
+      toast.error(error);
       return;
     }
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { updatePassword as updatePasswordAction, clearAuthError } from '../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export default function UpdatePassword() {
     const [password, setPassword] = useState("");
@@ -21,20 +21,14 @@ export default function UpdatePassword() {
 
     useEffect(() => {
         if (isUpdated) {
-            toast('Password updated successfully', {
-                type: 'success',
-                // position: toast.POSITION.BOTTOM_CENTER
-            });
+            toast.success("Password updated successfully");
             setOldPassword("");
             setPassword("");
             return;
         }
         if (error) {
-            toast(error, {
-                // position: toast.POSITION.BOTTOM_CENTER,
-                type: 'error',
-                onOpen: () => { dispatch(clearAuthError()) }
-            });
+            toast.error(error);
+            dispatch(clearAuthError);
             return;
         }
     }, [isUpdated, error, dispatch]);

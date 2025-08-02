@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { forgotPassword, clearAuthError } from "../../actions/userActions";
 
 export default function ForgotPassword() {
@@ -17,20 +17,15 @@ export default function ForgotPassword() {
 
     useEffect(() => {
         if (message) {
-            toast(message, {
-                type: 'success',
-                // position: toast.POSITION.BOTTOM_CENTER
-            });
+            toast.success(message);
             setEmail("");
             return;
         }
 
         if (error) {
-            toast(error, {
-                // position: toast.POSITION.BOTTOM_CENTER,
-                type: 'error',
-                onOpen: () => { dispatch(clearAuthError) }
-            });
+            dispatch(clearAuthError)
+            toast.error(error);
+
             return;
         }
     }, [message, error, dispatch]);

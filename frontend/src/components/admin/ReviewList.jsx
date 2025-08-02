@@ -4,7 +4,7 @@ import { deleteReview, getReviews } from "../../actions/productActions";
 import { clearError, clearReviewDeleted } from "../../slices/productSlice";
 import Loader from "../layouts/Loader";
 import DataTable from "react-data-table-component";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Sidebar from "./Sidebar";
 import { Trash2 } from "lucide-react";
 
@@ -74,16 +74,12 @@ export default function ReviewList() {
 
   useEffect(() => {
     if (error) {
-      toast(error, {
-        type: "error",
-        onOpen: () => dispatch(clearError()),
-      });
+      dispatch(clearError());
+      toast.error(error);
     }
     if (isReviewDeleted) {
-      toast("Review Deleted Successfully!", {
-        type: "success",
-        onOpen: () => dispatch(clearReviewDeleted()),
-      });
+      dispatch(clearReviewDeleted())
+      toast.success("Review Deleted Successfully");
       dispatch(getReviews(productId));
     }
   }, [dispatch, error, isReviewDeleted]);

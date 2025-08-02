@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { orderCompleted } from "../../slices/cartSlice";
 import { validateShipping } from './Shipping';
 import { createOrder } from '../../actions/orderActions';
@@ -50,11 +50,8 @@ export default function Payment() {
     useEffect(() => {
         validateShipping(shippingInfo, navigate);
         if (orderError) {
-            toast(orderError, {
-                // position: toast.POSITION.BOTTOM_CENTER,
-                type: 'error',
-                onOpen: () => { dispatch(clearOrderError()) }
-            });
+            dispatch(clearOrderError());
+            toast.error(orderError);
         }
     }, []);
 
@@ -78,20 +75,12 @@ export default function Payment() {
             });
 
             if (result.error) {
-                // toast(result.error.message, {
-                //     type: 'error',
-                //     // position: toast.POSITION.BOTTOM_CENTER
-                // });
-                console.log(result.error.message);
+                toast.error(result.error.message);
                 
                 document.querySelector('#pay_btn').disabled = false;
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
-                    // toast('Payment Success!', {
-                    //     type: 'success',
-                    //     // position: toast.POSITION.BOTTOM_CENTER
-                    // });
-                    console.log("succeeded");
+                    toast.success("Payment Successful!");
                     order.paymentInfo = {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status
@@ -101,20 +90,15 @@ export default function Payment() {
                     navigate('/order/success');
                 } else {
                     console.log(result.error.message);
-                    // toast('Please try again!', {
-                        //     type: 'warning',
-                        //     // position: toast.POSITION.BOTTOM_CENTER
-                        // });
-                    
+                    toast.error("Payment Failed!");
+                    document.querySelector('#pay_btn').disabled = false;
                     }
                 }
                 
             } catch (error) {
                 console.log(error.message);
-                // toast("Something went wrong!", {
-            //     type: 'error',
-            //     // position: toast.POSITION.BOTTOM_CENTER
-            // });
+                toast.error("Payment Failed!");
+                document.querySelector('#pay_btn').disabled = false;
         }
     };
 

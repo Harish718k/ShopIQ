@@ -92,7 +92,7 @@ import { Link } from 'react-router-dom';
 import { Star, ShoppingCart } from 'lucide-react';
 import { useDispatch } from 'react-redux'; 
 import { addCartItem } from "../../actions/cartActions";
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export default function Product({ product, col }) {
   const dispatch = useDispatch(); 
@@ -114,7 +114,7 @@ export default function Product({ product, col }) {
           <img
             src={product.images[0].image}
             alt={product.name}
-            className="w-full h-48 object-cover mb-4 rounded"
+            className="w-full h-48 object-contain mb-4 rounded bg-gray-200"
           />
         )}
 
@@ -148,7 +148,7 @@ export default function Product({ product, col }) {
               disabled={product.stock === 0}
               onClick={() => {
                   dispatch(addCartItem(product._id, 1));
-                  toast('Cart Item Added!', { type: 'success' });
+                  toast.success(`${product.name} added to cart!`);
               }}
               className="w-1/2 text-sm bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-3 rounded-xl flex justify-center items-center gap-1 disabled:bg-gray-400 cursor-pointer"
             >

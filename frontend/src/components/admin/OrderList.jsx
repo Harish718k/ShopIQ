@@ -12,7 +12,7 @@ import {
 } from "../../slices/orderSlice";
 import Loader from "../layouts/Loader";
 import DataTable from "react-data-table-component";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Sidebar from "./Sidebar";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -94,19 +94,13 @@ export default function OrderList() {
 
   useEffect(() => {
     if (error) {
-      toast(error, {
-        type: "error",
-        onOpen: () => {
-          dispatch(clearError());
-        },
-      });
+      dispatch(clearError());
+      toast.error(error)
       return;
     }
     if (isOrderDeleted) {
-      toast("Order Deleted Successfully!", {
-        type: "success",
-        onOpen: () => dispatch(clearOrderDeleted()),
-      });
+      dispatch(clearOrderDeleted());
+      toast.success("Order Deleted Successfully")
       return;
     }
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProduct, updateProduct } from "../../actions/productActions";
 import { clearError, clearProductUpdated } from "../../slices/productSlice";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function UpdateProduct() {
   const [name, setName] = useState("");
@@ -71,19 +71,15 @@ export default function UpdateProduct() {
 
   useEffect(() => {
     if (isProductUpdated) {
-      toast("Product Updated Successfully!", {
-        type: "success",
-        onOpen: () => dispatch(clearProductUpdated()),
-      });
+      dispatch(clearProductUpdated());
+      toast.success("Product Updated Successfully");
       setImages([]);
       return;
     }
 
     if (error) {
-      toast(error, {
-        type: "error",
-        onOpen: () => dispatch(clearError()),
-      });
+      dispatch(clearError());
+      toast.error(error);
       return;
     }
 

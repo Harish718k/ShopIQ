@@ -38,10 +38,8 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
     .filter();
     
     const filteredProductsCount = await apiFeatures.query.clone().countDocuments();
-    console.log(filteredProductsCount);
     
     const totalProductsCount = await Product.countDocuments();
-    console.log(totalProductsCount);
     let productsCount = totalProductsCount;
     if (filteredProductsCount !== totalProductsCount) {
         productsCount = filteredProductsCount;

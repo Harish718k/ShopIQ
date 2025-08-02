@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { orderDetail as orderDetailAction, updateOrder } from "../../actions/orderActions";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { clearOrderUpdated, clearError } from "../../slices/orderSlice";
 
 export default function UpdateOrder() {
@@ -24,18 +24,14 @@ export default function UpdateOrder() {
 
   useEffect(() => {
     if (isOrderUpdated) {
-      toast('Order Updated Successfully!', {
-        type: 'success',
-        onOpen: () => dispatch(clearOrderUpdated())
-      });
+      dispatch(clearOrderUpdated())
+      toast.success("Order Updated Successfully");
       return;
     }
 
     if (error) {
-      toast(error, {
-        type: 'error',
-        onOpen: () => dispatch(clearError())
-      });
+      dispatch(clearError())
+      toast.error(error);
       return;
     }
 

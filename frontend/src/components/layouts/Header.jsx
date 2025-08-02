@@ -91,7 +91,7 @@ export default function Header() {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-200 z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg border border-gray-200 z-50">
                   <ul className="text-sm text-copy py-2">
                     <li>
                       <button
@@ -99,7 +99,7 @@ export default function Header() {
                           navigate('/myprofile');
                           setDropdownOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-900"
                       >
                         Profile
                       </button>
@@ -110,7 +110,7 @@ export default function Header() {
                           navigate('/orders');
                           setDropdownOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-900"
                       >
                         Orders
                       </button>
@@ -121,7 +121,7 @@ export default function Header() {
                           logoutHandler();
                           setDropdownOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 text-error hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-900"
                       >
                         Logout
                       </button>

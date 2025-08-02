@@ -1,6 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, LayoutDashboard } from 'lucide-react';
+import { ChevronDown, ChevronUp, LayoutDashboard, ShoppingBag,
+  PlusCircle,
+  Users,
+  Star,
+  Package} from 'lucide-react';
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -26,6 +30,7 @@ export default function Sidebar() {
               onClick={() => setIsProductMenuOpen(!isProductMenuOpen)}
               className="flex items-center w-full text-gray-300 hover:bg-emerald-600 px-3 py-2 rounded transition"
             >
+              <Package size={18} className='pr-1' />
               Product
               {isProductMenuOpen ? (
                 <ChevronUp className="ml-auto w-4 h-4" />
@@ -39,13 +44,13 @@ export default function Sidebar() {
                   onClick={() => navigate('/admin/products')}
                   className="flex items-center text-gray-300 hover:bg-emerald-600 px-3 py-1 rounded cursor-pointer"
                 >
-                  <i className="fa fa-shopping-basket mr-2"></i> All
+                  <ShoppingBag size={18} className='pr-1'/> All
                 </li>
                 <li
                   onClick={() => navigate('/admin/products/create')}
                   className="flex items-center text-gray-300 hover:bg-emerald-600 px-3 py-1 rounded cursor-pointer"
                 >
-                  <i className="fa fa-plus mr-2"></i> Create
+                  <PlusCircle size={18} className='pr-1'/> Create
                 </li>
               </ul>
             )}
@@ -56,7 +61,7 @@ export default function Sidebar() {
               to="/admin/orders"
               className="flex items-center text-gray-300 hover:bg-emerald-600 px-3 py-2 rounded transition"
             >
-              <i className="fa fa-shopping-basket mr-2"></i>
+              <Package size={18} className='pr-1'/>
               Orders
             </Link>
           </li>
@@ -66,7 +71,7 @@ export default function Sidebar() {
               to="/admin/users"
               className="flex items-center text-gray-300 hover:bg-emerald-600 px-3 py-2 rounded transition"
             >
-              <i className="fa fa-users mr-2"></i>
+              <Users size={18} className='pr-1'/>
               Users
             </Link>
           </li>
@@ -76,7 +81,7 @@ export default function Sidebar() {
               to="/admin/reviews"
               className="flex items-center text-gray-300 hover:bg-emerald-600 px-3 py-2 rounded transition"
             >
-              <i className="fa fa-star mr-2"></i>
+              <Star size={18} className='pr-1'/>
               Reviews
             </Link>
           </li>

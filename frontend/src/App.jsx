@@ -41,6 +41,7 @@ import UpdateUser from './components/admin/UpdateUser';
 import ReviewList from './components/admin/ReviewList';
 import { Blocked } from './components/user/Blocked';
 import ImpersonationBanner from './components/admin/ImpersonationBanner';
+import { Settings } from './components/admin/Settings';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("")
@@ -101,6 +102,7 @@ function App() {
                       <Route path='/admin/users' element={ <ProtectedRoute isAdmin={true}><UserList/></ProtectedRoute> } />
                       <Route path='/admin/user/:id' element={ <ProtectedRoute isAdmin={true}><UpdateUser/></ProtectedRoute> } />
                       <Route path='/admin/reviews' element={ <ProtectedRoute isAdmin={true}><ReviewList/></ProtectedRoute> } />
+                      <Route path='/admin/settings' element={ <ProtectedRoute isAdmin={true}><Settings/></ProtectedRoute> } />
                     </Routes>
             </HelmetProvider>
           </Router>

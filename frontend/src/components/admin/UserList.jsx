@@ -33,7 +33,7 @@ export default function UserList() {
             <Pencil className="w-5 h-5 inline" />
           </Link>
           <button
-            onClick={(e) => deleteHandler(e, user._id)}
+            onClick={(e) => deleteHandler(e, user._id, user.role)}
             className="text-red-600 hover:underline border-l border-r px-1 cursor-pointer"
           >
             <Trash2 className="w-5 h-5 inline" />
@@ -69,6 +69,8 @@ export default function UserList() {
       name: "Role",
       selector: (row) => row.role,
       sortable: true,
+      width: "110px",
+      maxWidth: "110px",
     },{
       name: "Status",
       selector: (row) => row.isblocked ? "Blocked" : "Active",
@@ -78,6 +80,8 @@ export default function UserList() {
           {row.isblocked ? "Blocked" : "Active"}
         </p>
       ),
+      width: "110px",
+      maxWidth: "110px",
     },
     {
       name: "Actions",
@@ -87,8 +91,11 @@ export default function UserList() {
     },
   ];
 
-  const deleteHandler = (e, id) => {
+  const deleteHandler = (e, id, userRole) => {
     e.target.disabled = true;
+    if(userRole === "admin"){
+      return toast.error("You cannot delete another admin.");
+    }
     dispatch(deleteUser(id));
   };
 

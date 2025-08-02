@@ -14,6 +14,13 @@ exports.newOrder =  catchAsyncError( async (req, res, next) => {
         paymentInfo
     } = req.body;
 
+    
+
+    for (const item of orderItems) {
+
+        await updateStock(item.product, item.quantity);
+    }
+
     const order = await Order.create({
         orderItems,
         shippingInfo,
@@ -31,6 +38,19 @@ exports.newOrder =  catchAsyncError( async (req, res, next) => {
         order
     })
 })
+
+async function updateStock (productId, quantity){
+    const product = await Product.findById(productId);
+    if (!product) {
+        throw new ErrorHandler(`Product not found`, 404);
+        }
+
+        if (product.stock < quantity) {
+        throw new ErrorHandler(`Insufficient stock for ${product.name}`, 400);
+        }
+    product.stock = product.stock - quantity;
+    product.save({validateBeforeSave: false})
+}
 
 //Get Single Order - api/v1/order/:id
 exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
@@ -79,10 +99,6 @@ exports.updateOrder =  catchAsyncError(async (req, res, next) => {
     if(order.orderStatus === 'Delivered') {
         return next(new ErrorHandler('Order has been already delivered!', 400))
     }
-    //Updating the product stock of each order item
-    order.orderItems.forEach(async orderItem => {
-        await updateStock(orderItem.product, orderItem.quantity)
-    })
 
     order.orderStatus = req.body.orderStatus;
     order.deliveredAt = Date.now();
@@ -94,11 +110,7 @@ exports.updateOrder =  catchAsyncError(async (req, res, next) => {
     
 });
 
-async function updateStock (productId, quantity){
-    const product = await Product.findById(productId);
-    product.stock = product.stock - quantity;
-    product.save({validateBeforeSave: false})
-}
+
 
 //Admin: Delete Order - api/v1/order/:id
 exports.deleteOrder = catchAsyncError(async (req, res, next) => {

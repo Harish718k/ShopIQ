@@ -46,4 +46,4 @@ open the http://localhost:8000 and test the
 
 ## Screen Record
 
-> 📺 [Click here to view the demo](https://drive.google.com/file/d/1vcMxAjsMguXOA6zZjVbJGS_C_qjRvKCw/view?usp=sharing)
+> 📺 [Click here to view the demo](https://drive.google.com/drive/folders/1c9QC9U9AE57gGbMmrXhkqBGElV0R7RWf?usp=sharing)

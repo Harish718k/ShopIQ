@@ -37,7 +37,7 @@ npm run seed:products
 
 run this below command to run on root and frontend
 ```bash
-npm run prod
+npm run dev
 ```
 
 

@@ -95,7 +95,7 @@ exports.forgotPassword = catchAsyncError( async (req, res, next)=>{
     try{
         sendEmail({
             email: user.email,
-            subject: "JVLcart Password Recovery",
+            subject: "ShopIQ Password Recovery",
             message
         })
 

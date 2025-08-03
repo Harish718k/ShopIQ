@@ -39,7 +39,7 @@ run this below command to run on root and frontend
 ```bash
 npm run dev
 ```
-
+make sure your on node version v22.18
 
 ## Test
 open the http://localhost:8000 and test the 
